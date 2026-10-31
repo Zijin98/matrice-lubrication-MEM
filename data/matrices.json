@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-10-29T16:35:46-05:00",
+ "actualizado": "2026-10-31T08:16:30-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8972,6 +8972,100 @@
    "modelo": "GS-1930",
    "flota": "Manlift",
    "plantilla": "plataforma-elevadora-gs-1930"
+  },
+  {
+   "id": "EX007",
+   "equipo": "EX007",
+   "descripcion": "EXCAVADORA HYUNDAY",
+   "modelo": "HW65AH",
+   "flota": "SURFACE",
+   "plantilla": "",
+   "activo": "EXCAVADORA HYUNDAY HW65AH",
+   "codigo": "",
+   "lugar": "Proyecto Buriticá",
+   "fechaElaboracion": "2026-10-30",
+   "actualizado": "2026-10-31T08:16:30-05:00",
+   "imagen": "",
+   "foto": "img/fotos/equipo-mvwf19w5.jpg",
+   "puntos": [
+    {
+     "componente": "MOTOR",
+     "codigoLIS": "",
+     "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
+     "cantidad": "",
+     "tarea": "Lubricado",
+     "intervaloCambio": "500",
+     "metodo": "Manual",
+     "intervaloMuestreo": "250",
+     "revisionNivel": ""
+    },
+    {
+     "componente": "TRANSMISIÓN",
+     "codigoLIS": "",
+     "lubricante": "Chevron Delo Gear LS SAE 80W90",
+     "cantidad": "",
+     "tarea": "Lubricado",
+     "intervaloCambio": "500",
+     "metodo": "Manual",
+     "intervaloMuestreo": "250",
+     "revisionNivel": ""
+    },
+    {
+     "componente": "REDUCTOR DE GIRO",
+     "codigoLIS": "",
+     "lubricante": "",
+     "cantidad": "",
+     "tarea": "Lubricado",
+     "intervaloCambio": "1000",
+     "metodo": "Manual",
+     "intervaloMuestreo": "500",
+     "revisionNivel": ""
+    },
+    {
+     "componente": "DIFERENCIAL DELANTERO",
+     "codigoLIS": "",
+     "lubricante": "DELO GEAR LS SAE 80W-90",
+     "cantidad": "",
+     "tarea": "Lubricado",
+     "intervaloCambio": "500",
+     "metodo": "Manual",
+     "intervaloMuestreo": "500",
+     "revisionNivel": ""
+    },
+    {
+     "componente": "DIFERENCIAL TRASERO",
+     "codigoLIS": "",
+     "lubricante": "DELO GEAR LS SAE 80W-90",
+     "cantidad": "",
+     "tarea": "Lubricado",
+     "intervaloCambio": "500",
+     "metodo": "Manual",
+     "intervaloMuestreo": "500",
+     "revisionNivel": ""
+    },
+    {
+     "componente": "SISTEMA HYDRAULICO",
+     "codigoLIS": "",
+     "lubricante": "Chevron Hydraulic Oil AW 68",
+     "cantidad": "",
+     "tarea": "Lubricado",
+     "intervaloCambio": "2000",
+     "metodo": "Manual",
+     "intervaloMuestreo": "1000",
+     "revisionNivel": ""
+    }
+   ],
+   "fichas": [],
+   "advertencia": "Por favor recordar usar los implementos de seguridad, los aceites y grasas calientes pueden causar quemaduras y heridas graves durante la manipulación de relubricado. Se recomienda realizar mantenimientos preventivos para observar el funcionamiento tribológico, detectar taponamientos o alzas de temperatura en el sistema. Recordar la importancia de la buena estibación y limpieza de los implementos de lubricación. Se recomienda suministrar esta ficha de lubricación al OEM para su aprobación de garantía. Antes de accionar los equipos se debe verificar los niveles. LAS GRÁFICAS DE PUNTOS DE LUBRICACIÓN PUEDEN VARIAR DESDE EL MANUAL VS IN SITU, POR ENDE EL LUBRICADOR Y JEFE DE LUBRICADORES DEBEN VERIFICAR EN CAMPO LOS PUNTOS DE LUBRICADO.",
+   "primerosAuxilios": {
+    "ojos": "No hacen falta medidas específicas de primeros auxilios. A modo de precaución, quítese los lentes de contacto si los trae puestos y lávese los ojos con agua.",
+    "piel": "No hacen falta medidas específicas de primeros auxilios. A modo de precaución, quítese la ropa y los zapatos si resultan contaminados. Para quitarse la sustancia de la piel, use agua y jabón. Deseche la ropa y los zapatos contaminados o límpielos a cabalidad antes de volverlos a usar.",
+    "ingestion": "No hacen falta medidas específicas de primeros auxilios. No induzca el vómito. A modo de precaución, procure asesoramiento médico inmediato.",
+    "inhalacion": "No hacen falta medidas específicas de primeros auxilios. Si ha sido expuesto a niveles excesivos de la sustancia en el aire, traslade a la persona expuesta al aire fresco. Procure atención médica si sobreviene tos o molestia al respirar.",
+    "nota": "En caso de presencia de síntomas y efectos graves, por favor revisar la ficha de seguridad suministrada al área competente y procure atención médica inmediata."
+   },
+   "incendios": "Use niebla de agua, espuma, materiales químicos secos y dióxido de carbono (CO₂) para extinguir las llamas.",
+   "departamento": "Departamento de Tribología"
   },
   {
    "id": "S001",
