@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-10-31T09:52:13-05:00",
+ "actualizado": "2026-10-31T10:15:52-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8984,13 +8984,13 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2026-10-30",
-   "actualizado": "2026-10-31T09:52:13-05:00",
+   "actualizado": "2026-10-31T10:15:52-05:00",
    "imagen": "img/equipos/excavadora-hyunday-hw65ah-mvwiqfjh.jpg",
    "foto": "img/fotos/equipo-mvwf19w5.jpg",
    "puntos": [
     {
      "componente": "MOTOR",
-     "codigoLIS": "",
+     "codigoLIS": "CK4-15W40-B-G3",
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "2,20",
      "tarea": "Lubricado",
