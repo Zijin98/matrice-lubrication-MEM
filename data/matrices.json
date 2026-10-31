@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-10-31T16:12:53-05:00",
+ "actualizado": "2026-10-31T17:00:10-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8984,7 +8984,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2026-10-30",
-   "actualizado": "2026-10-31T14:27:21-05:00",
+   "actualizado": "2026-10-31T17:00:10-05:00",
    "imagen": "img/equipos/excavadora-hyunday-hw65ah-mvwiqfjh.jpg",
    "foto": "img/fotos/equipo-mvwf19w5.jpg",
    "puntos": [
@@ -9024,7 +9024,7 @@
     {
      "componente": "DIFERENCIALES",
      "codigoLIS": "GL5-80W90-M-G2",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
+     "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "1,3",
      "tarea": "Lubricado",
      "intervaloCambio": "500",
@@ -9046,7 +9046,7 @@
     {
      "componente": "mandos finales",
      "codigoLIS": "GL5-80W90-M-G2",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
+     "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "0.11",
      "tarea": "Lubricado",
      "intervaloCambio": "500",
