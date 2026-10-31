@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-10-31T15:30:37-05:00",
+ "actualizado": "2026-10-31T16:12:53-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -53,11 +53,11 @@
   },
   "chevron-delo-torqforce-sae-10w": {
    "nombre": "Chevron Delo TORQFORCE SAE 10W",
-   "imagen": ""
+   "imagen": "img/lubricantes/chevron-delo-torqforce-sae-10w-mvwwc9i5.jpg"
   },
   "chevron-delo-torqforce-sae-30": {
    "nombre": "Chevron Delo TORQFORCE SAE 30",
-   "imagen": ""
+   "imagen": "img/lubricantes/chevron-delo-torqforce-sae-30-mvwwd8zi.jpg"
   },
   "chevron-delo-torqforce-sae-50": {
    "nombre": "Chevron Delo TORQFORCE SAE 50",
@@ -249,7 +249,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": null,
+   "actualizado": "2026-10-31T16:12:53-05:00",
    "imagen": "img/equipos/cat-moto-grade-120m.jpg",
    "puntos": [
     {
