@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-10-31T08:16:30-05:00",
+ "actualizado": "2026-10-31T09:52:13-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8984,15 +8984,15 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2026-10-30",
-   "actualizado": "2026-10-31T08:16:30-05:00",
-   "imagen": "",
+   "actualizado": "2026-10-31T09:52:13-05:00",
+   "imagen": "img/equipos/excavadora-hyunday-hw65ah-mvwiqfjh.jpg",
    "foto": "img/fotos/equipo-mvwf19w5.jpg",
    "puntos": [
     {
      "componente": "MOTOR",
      "codigoLIS": "",
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
-     "cantidad": "",
+     "cantidad": "2,20",
      "tarea": "Lubricado",
      "intervaloCambio": "500",
      "metodo": "Manual",
@@ -9003,7 +9003,7 @@
      "componente": "TRANSMISIÓN",
      "codigoLIS": "",
      "lubricante": "Chevron Delo Gear LS SAE 80W90",
-     "cantidad": "",
+     "cantidad": "0,5",
      "tarea": "Lubricado",
      "intervaloCambio": "500",
      "metodo": "Manual",
@@ -9013,8 +9013,8 @@
     {
      "componente": "REDUCTOR DE GIRO",
      "codigoLIS": "",
-     "lubricante": "",
-     "cantidad": "",
+     "lubricante": "Chevron Delo Gear EP SAE 85W140",
+     "cantidad": "0,40",
      "tarea": "Lubricado",
      "intervaloCambio": "1000",
      "metodo": "Manual",
@@ -9022,21 +9022,10 @@
      "revisionNivel": ""
     },
     {
-     "componente": "DIFERENCIAL DELANTERO",
+     "componente": "DIFERENCIALES",
      "codigoLIS": "",
      "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "",
-     "tarea": "Lubricado",
-     "intervaloCambio": "500",
-     "metodo": "Manual",
-     "intervaloMuestreo": "500",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "DIFERENCIAL TRASERO",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "",
+     "cantidad": "1,3",
      "tarea": "Lubricado",
      "intervaloCambio": "500",
      "metodo": "Manual",
@@ -9047,11 +9036,33 @@
      "componente": "SISTEMA HYDRAULICO",
      "codigoLIS": "",
      "lubricante": "Chevron Hydraulic Oil AW 68",
-     "cantidad": "",
+     "cantidad": "deposito18",
      "tarea": "Lubricado",
      "intervaloCambio": "2000",
      "metodo": "Manual",
      "intervaloMuestreo": "1000",
+     "revisionNivel": ""
+    },
+    {
+     "componente": "mandos finales",
+     "codigoLIS": "",
+     "lubricante": "DELO GEAR LS SAE 80W-90",
+     "cantidad": "0.11",
+     "tarea": "Lubricado",
+     "intervaloCambio": "500",
+     "metodo": "Manual",
+     "intervaloMuestreo": "",
+     "revisionNivel": ""
+    },
+    {
+     "componente": "REFRIGERANTE",
+     "codigoLIS": "",
+     "lubricante": "Chevron ELC Antifreeze",
+     "cantidad": "3",
+     "tarea": "Lubricado",
+     "intervaloCambio": "2000",
+     "metodo": "Manual",
+     "intervaloMuestreo": "",
      "revisionNivel": ""
     }
    ],
