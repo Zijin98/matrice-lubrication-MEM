@@ -506,3 +506,6 @@ img.lis { display: block; width: 64px; height: 22px; object-fit: fill; border-ra
 #ed-unidades .filtro-buscar .i { left: 12px; top: 13px; transform: none; }
 
 .h-just { margin: 8px 0 0; font-size: 14px; color: var(--tinta); background: var(--superficie-2); border-left: 3px solid var(--marca); padding: 8px 10px; border-radius: 0 8px 8px 0; }
+.lis-prev { display: block; min-height: 0; }
+.lis-prev img.lis { margin: 4px 0 0; }
+.lis-prev small { color: var(--tinta-3); }

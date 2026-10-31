@@ -204,7 +204,7 @@ export async function imagenMatriz({ equipo, lubricantes, url, logoBlanco, src, 
       L.img(logo, PAD, (210 - lh) / 2, lw, lh);
     } else { L.fuente(56, 800, F.dsp); L.texto('ZIJIN · CONTINENTAL GOLD', PAD, 128, '#FFFFFF'); }
     L.fuente(60, 800, F.dsp); L.texto('CARTA DE LUBRICACIÓN', W - PAD, 108, '#FFFFFF', 'right');
-    L.fuente(34, 600); L.texto('Matriz de cambio de aceite', W - PAD, 156, '#FFFFFF', 'right');
+    L.fuente(34, 600); L.texto('Matriz de cambio de aceite - MEM', W - PAD, 156, '#FFFFFF', 'right');
     let y = 210 + 70;
 
     // ---- Datos del activo + QR

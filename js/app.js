@@ -201,7 +201,7 @@ function confirmar({ titulo, texto, si = 'Aceptar', no = 'Cancelar' }) {
 }
 
 function pie(texto) {
-  return `<footer class="pie"><div class="contenedor"><span><b>${esc(texto || plantilla().departamento || 'Departamento de Tribología')}</b> · ${esc(lugarGeneral())}</span><span>Zijin · Continental Gold</span></div></footer>`;
+  return `<footer class="pie"><div class="contenedor"><span><b>${esc(texto || plantilla().departamento || 'Departamento de Tribología')}</b> · ${esc(lugarGeneral())} · Juan José Manco Rueda</span><span>Zijin · Continental Gold</span></div></footer>`;
 }
 
 /* ------------------------------------------------------------------ Inicio */
@@ -436,11 +436,11 @@ function htmlBuscador(placeholder) {
 }
 
 function vistaInicio() {
-  document.title = 'Matrices de lubricación · Zijin-Continental Gold';
+  document.title = 'Matrices de lubricación - MEM · Zijin-Continental Gold';
   app.innerHTML = `
   <section class="portada contenedor">
     <p class="eyebrow">${esc(plantilla().departamento || 'Departamento de Tribología')}</p>
-    <h1>Matrices de lubricación</h1>
+    <h1>Matrices de lubricación - MEM</h1>
     <p class="lead">Cambio de aceite por equipo · ${esc(lugarGeneral())}</p>
     ${htmlBuscador('Buscar equipo, modelo, componente o lubricante')}
     ${htmlFiltros()}
@@ -538,7 +538,7 @@ function vistaMatriz(id) {
   <article class="contenedor matriz">
     <header class="m-cabecera">
       <div>
-        <p class="eyebrow">Matriz de cambio de aceite</p>
+        <p class="eyebrow">Matriz de cambio de aceite - MEM</p>
         <h1>${esc(eq.equipo)}</h1>
         ${eq.descripcion ? `<p class="m-desc">${esc(eq.descripcion)}</p>` : ''}
         <div class="chips">
@@ -595,7 +595,7 @@ function vistaMatriz(id) {
 
 function etiquetaUnidad(eq) {
   return etiquetaQR({
-    titulo: eq.equipo, eyebrow: 'Matriz de cambio de aceite',
+    titulo: eq.equipo, eyebrow: 'Matriz de cambio de aceite - MEM',
     detalle: [eq.modelo, eq.flota].filter(Boolean).join(' · ') || eq.activo,
     url: urlUnidad(eq.id), pie: `${eq.departamento || 'Departamento de Tribología'} · ${eq.lugar || lugarGeneral()}`, logoBlanco: LOGO_BLANCO,
   });
@@ -844,7 +844,8 @@ function vistaEditor(id) {
       <div id="ed-unidades"></div>
     </fieldset>
 
-    <datalist id="dl-lub">${Object.values(estado.datos.lubricantes || {}).map((l) => `<option value="${esc(l.nombre)}">`).join('')}</datalist>
+    <datalist id="dl-lub">${[...catalogoLubricantes().values()].map((l) => `<option value="${esc(l.nombre)}">${esc(l.lis)}</option>`).join('')}</datalist>
+    <datalist id="dl-lis">${Object.keys(estado.datos.lis || {}).map((c) => `<option value="${esc(c)}">`).join('')}</datalist>
     <datalist id="dl-metodo">${valores('metodo').map((v) => `<option value="${esc(v)}">`).join('')}</datalist>
     <datalist id="dl-tarea">${valores('tarea').map((v) => `<option value="${esc(v)}">`).join('')}</datalist>
 
@@ -882,6 +883,7 @@ function vistaEditor(id) {
       b.puntos[i][t.dataset.k] = t.value;
       t.closest('.campo')?.classList.remove('invalido');
       if (t.dataset.k === 'componente') t.closest('.ed-punto').querySelector('.ed-punto-cab b').textContent = t.value || `Punto ${i + 1}`;
+      if (t.dataset.k === 'codigoLIS') { const pv = t.closest('.campo').querySelector('[data-lis-prev]'); if (pv) pv.innerHTML = lisImg(t.value) || (vacio(t.value) ? '' : '<small>Sin color registrado</small>'); }
     } else if (t.id === 'u-buscar') {
       pintarUnidadesEditor();
     } else if (t.dataset.fk) {
@@ -890,7 +892,10 @@ function vistaEditor(id) {
     }
   });
   f.addEventListener('change', (e) => {
-    if (e.target.dataset.k === 'lubricante') pintarLubsEditor();
+    if (e.target.dataset.k === 'lubricante') {
+      const i = +e.target.closest('[data-i]').dataset.i;
+      if (!autocompletarLubricante(i)) pintarLubsEditor();
+    }
     if (e.target.matches('input[type=file]')) cargarImagenEditor(e.target);
     if (e.target.dataset.unidad) {
       if (e.target.checked) ed.aplicarA.add(e.target.dataset.unidad); else ed.aplicarA.delete(e.target.dataset.unidad);
@@ -924,6 +929,51 @@ function pintarImagenEditor() {
     </div>`;
 }
 
+/** Lubricantes ya registrados: nombre oficial, código LIS y ficha técnica más usados. */
+function catalogoLubricantes() {
+  if (estado._catDe === estado.datos) return estado._cat;
+  const m = new Map();
+  const cuenta = (obj, k) => { if (k) obj[k] = (obj[k] || 0) + 1; };
+  [...estado.datos.equipos, ...(estado.datos.plantillas || [])].forEach((e) => {
+    const fichas = new Map((e.fichas || []).filter((f) => f.url).map((f) => [clave(f.nombre), f.url]));
+    (e.puntos || []).forEach((p) => {
+      const n = String(p.lubricante || '').trim();
+      if (!n || esNA(n)) return;
+      const k = clave(n);
+      if (!m.has(k)) m.set(k, { nombres: {}, lis: {}, fichas: {} });
+      const x = m.get(k);
+      cuenta(x.nombres, n);
+      if (!esNA(p.codigoLIS)) cuenta(x.lis, String(p.codigoLIS || '').trim());
+      cuenta(x.fichas, fichas.get(k));
+    });
+  });
+  const mayor = (o) => Object.entries(o).sort((a, b) => b[1] - a[1])[0]?.[0] || '';
+  const cat = new Map();
+  m.forEach((x, k) => cat.set(k, { nombre: mayor(x.nombres), lis: mayor(x.lis), ficha: mayor(x.fichas) }));
+  (Object.entries(estado.datos.lubricantes || {})).forEach(([k, l]) => { if (!cat.has(k)) cat.set(k, { nombre: l.nombre, lis: '', ficha: '' }); });
+  estado._catDe = estado.datos; estado._cat = cat;
+  return cat;
+}
+
+/** Al escribir un lubricante ya registrado completa LIS, nombre oficial y ficha técnica. */
+function autocompletarLubricante(i) {
+  const ed = estado.editor, b = ed.borrador, p = b.puntos[i];
+  const info = catalogoLubricantes().get(clave(p.lubricante || ''));
+  if (!info) return false;
+  const hechos = [];
+  if (info.nombre && p.lubricante !== info.nombre) p.lubricante = info.nombre;
+  if (info.lis && p.codigoLIS !== info.lis) { p.codigoLIS = info.lis; hechos.push(`código LIS ${info.lis}`); }
+  b.fichas = b.fichas || [];
+  if (info.ficha && !b.fichas.some((f) => clave(f.nombre) === clave(info.nombre))) {
+    b.fichas.push({ nombre: info.nombre, url: info.ficha });
+    hechos.push('ficha técnica');
+  }
+  if ((estado.datos.lubricantes || {})[clave(info.nombre)]?.imagen || (ed.lubs[clave(info.nombre)] || {}).imagen) hechos.push('imagen');
+  pintarPuntosEditor(); pintarLubsEditor(); pintarFichasEditor();
+  if (hechos.length) toast(`${info.nombre}: se completó ${hechos.join(', ')}`);
+  return true;
+}
+
 function pintarPuntosEditor() {
   const b = estado.editor.borrador, n = b.puntos.length;
   $('#ed-puntos').innerHTML = b.puntos.map((p, i) => `
@@ -937,7 +987,9 @@ function pintarPuntosEditor() {
       <div class="rejilla rejilla-pts">
         ${CAMPOS_PUNTO.map(([k, etq, req, cls]) => `<label class="campo ${cls || ''}"><span>${etq}${req ? ' <span class="req">*</span>' : ''}</span>
           <input data-k="${k}" value="${esc(p[k] || '')}" autocomplete="off" ${k === 'lubricante' ? 'list="dl-lub"' : k === 'metodo' ? 'list="dl-metodo"' : k === 'tarea' ? 'list="dl-tarea"' : ''}
-          ${k === 'cantidad' ? 'inputmode="decimal" placeholder="Ej.: 4,5"' : k === 'intervaloCambio' ? 'placeholder="Ej.: 500 h"' : k === 'intervaloMuestreo' ? 'placeholder="Ej.: 250"' : ''}></label>`).join('')}
+          ${k === 'cantidad' ? 'inputmode="decimal" placeholder="Ej.: 4,5"' : k === 'intervaloCambio' ? 'placeholder="Ej.: 500 h"' : k === 'intervaloMuestreo' ? 'placeholder="Ej.: 250"' : k === 'codigoLIS' ? 'list="dl-lis"' : ''}>
+          ${k === 'codigoLIS' ? `<span class="lis-prev" data-lis-prev>${lisImg(p.codigoLIS) || (vacio(p.codigoLIS) ? '' : '<small>Sin color registrado</small>')}</span>` : ''}
+          ${k === 'lubricante' ? '<small>Si elige un lubricante registrado se completan el código LIS y la ficha técnica.</small>' : ''}</label>`).join('')}
       </div>
     </div>`).join('');
 }
