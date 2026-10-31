@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-10-31T14:27:21-05:00",
+ "actualizado": "2026-10-31T15:30:37-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -127,7 +127,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": null,
+   "actualizado": "2026-10-31T15:30:37-05:00",
    "imagen": "img/equipos/cat-moto-grade-120k.jpg",
    "puntos": [
     {
@@ -136,9 +136,9 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "4,8",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "250 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
