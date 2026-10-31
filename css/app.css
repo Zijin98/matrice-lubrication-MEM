@@ -509,3 +509,16 @@ img.lis { display: block; width: 64px; height: 22px; object-fit: fill; border-ra
 .lis-prev { display: block; min-height: 0; }
 .lis-prev img.lis { margin: 4px 0 0; }
 .lis-prev small { color: var(--tinta-3); }
+
+/* ---------- Uso sin conexión */
+.aviso-red { background: var(--ambar-fondo); border-bottom: 1px solid var(--ambar-borde); color: var(--ambar-tinta); font-size: 14px; }
+.aviso-red .contenedor { display: flex; gap: 8px; align-items: flex-start; padding-top: 8px; padding-bottom: 8px; }
+.aviso-red .i { margin-top: 2px; }
+.offline-card { margin-top: 16px; display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: var(--superficie); border: 1px solid var(--linea); border-radius: var(--radio); }
+.offline-card .d-icono { flex: none; margin: 0; }
+.offline-card h2 { font-size: 18px; }
+.offline-card p { margin: 4px 0 0; font-size: 14px; color: var(--tinta-2); }
+.offline-card p .i { color: var(--verde-tinta); vertical-align: -3px; }
+@media (min-width: 720px) { .offline-card { max-width: 560px; } }
+.barra-progreso { margin-top: 10px; height: 8px; border-radius: 999px; background: var(--linea); overflow: hidden; }
+.barra-progreso span { display: block; height: 100%; width: 0; background: var(--marca); transition: width .2s; }

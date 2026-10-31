@@ -456,6 +456,7 @@ function vistaInicio() {
         <button type="button" class="btn btn-sec btn-peq" data-accion="qr-inicio">${I('descargar')} Descargar QR</button>
       </div>
     </div>
+    ${htmlOffline()}
   </section>
   ${pie()}`;
   montarBuscador('ver');
@@ -1365,9 +1366,16 @@ document.addEventListener('click', async (e) => {
   const acc = b.dataset.accion;
   const ed = estado.editor;
   switch (acc) {
-    case 'editar': return ir({ vista: 'editar' });
-    case 'nueva': return ir({ vista: 'nueva' });
-    case 'historial': return ir({ vista: 'historial' });
+    case 'editar': case 'nueva': case 'historial':
+      if (!navigator.onLine) { toast('Sin conexión: editar, crear o ver el historial requiere internet.', 'error'); return; }
+      return ir({ vista: acc === 'editar' ? 'editar' : acc });
+    case 'precargar':
+      if (!pedirPrecarga()) toast('Necesita conexión a internet para guardar la copia.', 'error');
+      else { const est = $('#offline-estado'); if (est) est.textContent = 'Preparando la descarga…'; }
+      return;
+    case 'instalar':
+      if (estado.instalar) { estado.instalar.prompt(); estado.instalar.userChoice.finally(() => { estado.instalar = null; b.hidden = true; }); }
+      return;
     case 'salir': {
       if (ed && calcularCambios(ed).length && !(await confirmar({ titulo: '¿Cerrar la sesión?', texto: 'Hay cambios sin guardar que se perderán.', si: 'Cerrar sesión', no: 'Seguir editando' }))) return;
       return cerrarSesion();
@@ -1450,8 +1458,85 @@ window.addEventListener('beforeunload', (e) => {
 async function cargarJSON(url) {
   const r = await fetch(url, { cache: 'no-store' });
   if (!r.ok) throw new Error(`${url}: ${r.status}`);
+  if (r.headers.get('X-Desde-Cache') === '1') estado.desdeCopia = true;
   return r.json();
 }
+
+/* ------------------------------------------------- Uso sin conexión */
+const LS = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* almacenamiento no disponible */ } },
+};
+estado.instalar = null;
+
+function pintarAvisoRed() {
+  let b = $('#aviso-red');
+  const sinRed = !navigator.onLine || estado.desdeCopia;
+  if (!sinRed) { if (b) b.remove(); return; }
+  if (!b) {
+    b = document.createElement('div');
+    b.id = 'aviso-red'; b.className = 'aviso-red'; b.setAttribute('role', 'status');
+    $('.banda').after(b);
+  }
+  const p = LS.get('precarga');
+  b.innerHTML = `<div class="contenedor">${I('info', 'i-peq')}<span><b>Sin conexión.</b> Está viendo la copia guardada en este celular${p && p.fecha ? ` (actualizada el ${esc(fechaHora(p.fecha))})` : ''}. Editar requiere internet.</span></div>`;
+}
+
+function textoOffline() {
+  const p = LS.get('precarga');
+  if (!('serviceWorker' in navigator)) return 'Este navegador no permite el uso sin conexión.';
+  if (p && p.fecha) return `${I('check', 'i-peq')} Disponible sin conexión en este celular: ${p.equipos || ''} matrices con sus imágenes. Última actualización: ${esc(fechaHora(p.fecha))}`;
+  return 'Guarde las matrices en este celular para consultarlas aunque no haya señal (unos 8 MB).';
+}
+
+function htmlOffline() {
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  return `<div class="offline-card" id="offline-card">
+    <div class="d-icono">${I('descargar')}</div>
+    <div>
+      <h2>Uso sin conexión</h2>
+      <p id="offline-estado">${textoOffline()}</p>
+      <div class="barra-progreso" id="offline-barra" hidden><span></span></div>
+      <div class="fila-botones" style="margin:10px 0 0">
+        <button type="button" class="btn btn-sec btn-peq" data-accion="precargar">${I('descargar', 'i-peq')} ${LS.get('precarga') ? 'Actualizar copia' : 'Guardar para uso sin conexión'}</button>
+        <button type="button" class="btn btn-primario btn-peq" data-accion="instalar" ${estado.instalar ? '' : 'hidden'}>${I('mas', 'i-peq')} Instalar en el celular</button>
+      </div>
+      ${ios ? '<p class="ayuda" style="margin:10px 0 0">En iPhone: toque Compartir y luego «Agregar a pantalla de inicio» para abrirla como una app.</p>' : ''}
+    </div>
+  </div>`;
+}
+
+function pedirPrecarga() {
+  if (!('serviceWorker' in navigator) || !navigator.onLine) return false;
+  navigator.serviceWorker.ready.then((reg) => reg.active && reg.active.postMessage({ tipo: 'precargar' }));
+  return true;
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('message', (e) => {
+    const m = e.data || {};
+    const est = $('#offline-estado'), barra = $('#offline-barra');
+    if (m.tipo === 'progreso') {
+      if (est) est.textContent = `Guardando matrices e imágenes en este celular… ${m.hechos} de ${m.total}`;
+      if (barra) { barra.hidden = false; barra.firstElementChild.style.width = `${m.total ? Math.round((m.hechos / m.total) * 100) : 0}%`; }
+    } else if (m.tipo === 'listo') {
+      LS.set('precarga', { fecha: m.fecha, equipos: m.equipos, actualizado: m.actualizado });
+      if (est) est.innerHTML = textoOffline();
+      if (barra) barra.hidden = true;
+      pintarAvisoRed();
+    } else if (m.tipo === 'error') {
+      if (est) est.textContent = 'No se pudo completar la copia. Se intentará de nuevo cuando haya buena señal.';
+      if (barra) barra.hidden = true;
+    }
+  });
+}
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  estado.instalar = e;
+  const b = $('[data-accion="instalar"]'); if (b) b.hidden = false;
+});
+window.addEventListener('online', () => { estado.desdeCopia = false; pintarAvisoRed(); });
+window.addEventListener('offline', pintarAvisoRed);
 
 async function iniciar() {
   try {
@@ -1468,6 +1553,13 @@ async function iniciar() {
   const r = leerRuta();
   history.replaceState(r, '', location.pathname + location.search);
   render(r);
-  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+  pintarAvisoRed();
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    navigator.serviceWorker.register('sw.js').then(() => {
+      // Copia automática la primera vez o cuando las matrices cambiaron
+      const p = LS.get('precarga');
+      if (!estado.desdeCopia && (!p || p.actualizado !== (estado.datos.actualizado || ''))) pedirPrecarga();
+    }).catch(() => {});
+  }
 }
 iniciar();
