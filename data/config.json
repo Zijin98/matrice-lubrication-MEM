@@ -1,7 +1,7 @@
 {
   "repo": {
-    "owner": "juanjoru98",
-    "name": "matrices-lubricacion",
+    "owner": "Zijin98",
+    "name": "matrice-lubrication-MEM",
     "branch": "main"
   },
   "urlPublica": "",
@@ -11,7 +11,7 @@
     "verificador": "2vcODExU+pO0m5MjifswrRvNUfbwfjRmi4H/wHZNt/s="
   },
   "tokenCifrado": {
-    "iv": "GkHSXxpihWmawBWh",
-    "data": "uIiDWhCkZ9BRR1ZYStshSJbbatsnU5h3GRsNqeLnhfneuusuJKD+PD3CjPBR/ytp8Z/t5d7i2uj/xv4xDK40UlPN9mf0/k73zcS2ZDw+LciT/LZtmC//aF6KOA4rXYH78NPqRHHzoFqs+ROnjQ=="
+    "iv": "sc59SFCkKr2foYmg",
+    "data": "kLhFnxUfXzYsW52fYRaoFhiIGdbYnnqxxjAgpMzLaXKfDJRFERCYJe62TmsR/CZPv915rVzfx7UCH4lMM7uAYQO5WfziJlV6qAkbN4va9Gw6JrHx3IhvtBLi9+Vd52P/x36RQWRD6ei9gh+fJw=="
   }
 }
