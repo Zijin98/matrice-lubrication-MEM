@@ -850,6 +850,11 @@ function vistaEditor(id) {
     <datalist id="dl-metodo">${valores('metodo').map((v) => `<option value="${esc(v)}">`).join('')}</datalist>
     <datalist id="dl-tarea">${valores('tarea').map((v) => `<option value="${esc(v)}">`).join('')}</datalist>
 
+    ${ed.modo === 'editar' ? `<fieldset class="ed-seccion zona-peligro"><legend>Eliminar matriz</legend>
+      <p class="ayuda">Elimina por completo la matriz del equipo ${esc(ed.original.equipo)}: deja de aparecer en el inicio y su QR mostrará «sin matriz». ${delModelo(ed.original.modelo).length <= 1 ? `Es el único equipo del modelo ${esc(ed.original.modelo || '')}, así que el modelo también desaparece del inicio.` : `El modelo ${esc(ed.original.modelo || '')} sigue con ${delModelo(ed.original.modelo).length - 1} equipo${delModelo(ed.original.modelo).length - 1 === 1 ? '' : 's'}.`} La eliminación queda en el historial y la matriz se puede volver a crear con «Nueva matriz».</p>
+      <button type="button" class="btn btn-sec btn-peligro" data-accion="eliminar-matriz">${I('basura')} Eliminar la matriz de ${esc(ed.original.equipo)}</button>
+    </fieldset>` : ''}
+
     <div class="ed-acciones"><div class="contenedor">
       <button type="button" class="btn btn-fantasma" data-accion="cancelar-edicion">Cancelar</button>
       <button type="submit" class="btn btn-primario">${I('check')} Guardar cambios</button>
@@ -1233,6 +1238,117 @@ function dialogoExito(eq, modo) {
   $('#ok-inicio').onclick = () => { cerrarCapa(false); ir({ vista: 'inicio' }); };
 }
 
+/* ---------------------------------------------------- Eliminar matriz */
+function dialogoEliminar() {
+  const ed = estado.editor, eq = ed.original;
+  const resto = delModelo(eq.modelo).filter((e) => e.id !== eq.id).length;
+  const fecha = ahoraISO();
+  const cambios = [`Eliminación de la matriz del equipo ${eq.equipo}${eq.modelo ? ` (modelo ${eq.modelo})` : ''} con ${eq.puntos.length} punto${eq.puntos.length === 1 ? '' : 's'}: ${eq.puntos.map((p) => norm(p.componente) || '—').join(', ')}`];
+  if (!resto && eq.modelo) cambios.push(`El modelo ${eq.modelo} quedó sin equipos y deja de mostrarse en el inicio`);
+  abrirCapa(`<form class="dialogo dialogo-ancho" id="f-eliminar" role="dialog" aria-modal="true" aria-labelledby="t-del" novalidate>
+    <div class="d-icono peligro">${I('basura')}</div>
+    <h2 id="t-del">Eliminar la matriz de ${esc(eq.equipo)}</h2>
+    <p>La matriz se borra de la página. El QR de ${esc(eq.equipo)} mostrará «sin matriz» hasta que alguien la vuelva a crear.${!resto && eq.modelo ? ` <b>${esc(eq.modelo)} es el último equipo de su modelo: el modelo desaparece del inicio.</b>` : ''}</p>
+    <label class="campo"><span>Para confirmar, escriba el código del equipo (${esc(eq.equipo)}) <span class="req">*</span></span><input id="e-codigo" autocomplete="off" autocapitalize="characters" required></label>
+    <label class="campo"><span>Nombre de la persona que elimina <span class="req">*</span></span><input id="e-nombre" autocomplete="name" required></label>
+    <label class="campo"><span>Documento de identificación <span class="req">*</span></span><input id="e-doc" autocomplete="off" required></label>
+    <label class="campo"><span>Justificación de la eliminación <span class="req">*</span></span><textarea id="e-just" rows="3" required placeholder="Ej.: Equipo dado de baja / vendido / trasladado de proyecto / matriz creada por error"></textarea><small>Queda en el historial.</small></label>
+    <div class="resumen">
+      <h3>Se registra automáticamente</h3>
+      <dl><dt>Fecha</dt><dd>${esc(fechaHora(fecha))}</dd><dt>Matriz</dt><dd>Equipo ${esc(eq.equipo)} · eliminación</dd></dl>
+      <h3>Cambios realizados</h3>
+      <ul class="cambios">${cambios.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+    </div>
+    <p class="error" id="e-error" hidden></p>
+    <div id="e-progreso"></div>
+    <div class="d-acciones"><button type="button" class="btn btn-fantasma" data-cerrar>Cancelar</button><button type="submit" class="btn btn-peligro-lleno" id="e-ok">${I('basura')} Eliminar matriz</button></div>
+  </form>`);
+  const f = $('#f-eliminar');
+  f.addEventListener('input', (e) => { e.target.closest('.campo')?.classList.remove('invalido'); $('#e-error').hidden = true; });
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const codigo = norm($('#e-codigo').value).toUpperCase(), nombre = norm($('#e-nombre').value), doc = norm($('#e-doc').value), just = norm($('#e-just').value), err = $('#e-error');
+    $$('.campo', f).forEach((c) => c.classList.remove('invalido'));
+    const faltan = [];
+    if (codigo !== eq.equipo.toUpperCase()) { faltan.push(`el código ${eq.equipo} para confirmar`); $('#e-codigo').closest('.campo').classList.add('invalido'); }
+    if (nombre.length < 3) { faltan.push('el nombre completo'); $('#e-nombre').closest('.campo').classList.add('invalido'); }
+    if (doc.length < 4) { faltan.push('el documento de identificación'); $('#e-doc').closest('.campo').classList.add('invalido'); }
+    if (just.length < 10) { faltan.push('la justificación (mínimo 10 caracteres)'); $('#e-just').closest('.campo').classList.add('invalido'); }
+    if (faltan.length) { err.textContent = `Falta ${faltan.length > 1 ? `${faltan.slice(0, -1).join(', ')} y ${faltan.at(-1)}` : faltan[0]}.`; err.hidden = false; return; }
+    const btn = $('#e-ok');
+    btn.disabled = true; f.setAttribute('data-ocupado', '');
+    $$('[data-cerrar]', f).forEach((x) => { x.disabled = true; });
+    const prog = (t) => { $('#e-progreso').innerHTML = `<p class="progreso"><span class="giro" aria-hidden="true"></span>${esc(t)}</p>`; };
+    try {
+      const r = await eliminarEnGitHub(eq, { nombre, documento: doc, justificacion: just, accion: 'Eliminación', matriz: eq.equipo, aplicadoA: [], cambios }, prog);
+      estado.editor = null;
+      abrirCapa(`<div class="dialogo" role="dialog" aria-modal="true" aria-labelledby="t-delok">
+        <div class="d-icono ok">${I('check')}</div>
+        <h2 id="t-delok">Matriz eliminada</h2>
+        <p>La matriz del equipo ${esc(eq.equipo)} se eliminó y quedó registrada en el historial.${r.modeloVacio ? ` El modelo ${esc(eq.modelo)} ya no tiene equipos y no se mostrará en el inicio.` : ''} Los técnicos verán el cambio en 1 a 2 minutos.</p>
+        <div class="d-acciones"><button type="button" class="btn btn-primario" id="del-inicio">Ir al inicio</button></div>
+      </div>`, { alCerrar: () => ir({ vista: 'inicio' }) });
+      $('#del-inicio').onclick = () => { cerrarCapa(false); ir({ vista: 'inicio' }); };
+    } catch (x) {
+      console.error(x);
+      $('#e-progreso').innerHTML = '';
+      err.textContent = x.message || 'No se pudo eliminar. Intente de nuevo.';
+      err.hidden = false;
+      btn.disabled = false; f.removeAttribute('data-ocupado');
+      $$('[data-cerrar]', f).forEach((y) => { y.disabled = false; });
+    }
+  });
+}
+
+async function agregarAlHistorial(repo, registro) {
+  const s = estado.sesion;
+  const htxt = await repo.leerTexto('data/historial.json');
+  let hist = { esquema: 1, cifrado: null };
+  try { if (htxt) hist = JSON.parse(htxt); } catch { /* archivo vacío o dañado */ }
+  let registros = [];
+  if (hist.cifrado) {
+    try { registros = JSON.parse(await descifrar(s.claveHistorial, hist.cifrado)); } catch {
+      throw new Error('No se pudo abrir el historial con esta contraseña. Si la contraseña cambió, vuelva a configurar en configurar.html.');
+    }
+  }
+  registros.push(registro);
+  return { esquema: 1, registros: registros.length, cifrado: await cifrar(s.claveHistorial, JSON.stringify(registros)) };
+}
+
+async function eliminarEnGitHub(eq, registro, progreso) {
+  const s = estado.sesion;
+  if (!s || !s.token) throw new Error('El guardado en línea no está activado. Configure el token de GitHub en configurar.html (paso 4 de la guía).');
+  const repo = new Repo({ ...datosRepo(estado.config), token: s.token });
+  for (let intento = 0; ; intento++) {
+    try {
+      progreso('Leyendo la versión más reciente…');
+      const txt = await repo.leerTexto('data/matrices.json');
+      const remoto = txt ? JSON.parse(txt) : clonar(estado.datos);
+      remoto.equipos = remoto.equipos || [];
+      const i = remoto.equipos.findIndex((e) => e.id === eq.id);
+      if (i < 0) throw new Error(`La matriz del equipo ${eq.equipo} ya no existe (otra persona pudo eliminarla).`);
+      remoto.equipos.splice(i, 1);
+      const modeloVacio = !!eq.modelo && !remoto.equipos.some((e) => (e.modelo || '') === eq.modelo);
+      const ahora = ahoraISO();
+      remoto.actualizado = ahora;
+
+      progreso('Actualizando el historial de cambios…');
+      const histNuevo = await agregarAlHistorial(repo, { fecha: ahora, ...registro, matriz: eq.equipo, matrizId: eq.id });
+
+      progreso('Guardando en GitHub…');
+      await repo.commit([
+        { ruta: 'data/matrices.json', texto: `${JSON.stringify(remoto, null, 1)}\n` },
+        { ruta: 'data/historial.json', texto: `${JSON.stringify(histNuevo, null, 2)}\n` },
+      ], `Elimina matriz del equipo ${eq.equipo}${modeloVacio ? ` (modelo ${eq.modelo} sin equipos)` : ''}`);
+      estado.datos = remoto;
+      return { modeloVacio };
+    } catch (e) {
+      if (intento === 0 && (e.estado === 409 || e.estado === 422)) continue;
+      throw e;
+    }
+  }
+}
+
 /* ---------------------------------------------------- Guardar en GitHub */
 async function guardarEnGitHub(ed, registro, progreso) {
   const s = estado.sesion;
@@ -1312,7 +1428,7 @@ async function vistaHistorial() {
   app.innerHTML = `${barraAdmin('Historial de cambios', { vista: 'inicio' }, '<button type="button" class="btn btn-sec btn-peq" data-accion="csv" disabled>' + I('descargar') + ' CSV</button>')}
   <section class="contenedor vista-admin">
     <h1>Historial de cambios</h1>
-    <p class="lead">Quién actualizó o creó cada matriz, cuándo y qué cambió. Este registro se guarda cifrado.</p>
+    <p class="lead">Quién actualizó, creó o eliminó cada matriz, cuándo y qué cambió. Este registro se guarda cifrado.</p>
     <div id="h-lista" style="margin-top:18px"><p class="progreso"><span class="giro" aria-hidden="true"></span>Cargando historial…</p></div>
   </section>`;
   let regs = [];
@@ -1332,7 +1448,7 @@ async function vistaHistorial() {
   const csv = $('[data-accion="csv"]');
   if (csv) csv.disabled = !regs.length;
   $('#h-lista').innerHTML = regs.length ? `<ul class="historial">${regs.map((r) => `<li class="h-item">
-      <div class="h-cab"><span class="etiqueta ${r.accion === 'Creación' ? 'nueva' : ''}">${esc(r.accion)}</span><b>${esc(r.matriz)}</b><span class="h-fecha">${esc(fechaHora(r.fecha))}</span></div>
+      <div class="h-cab"><span class="etiqueta ${r.accion === 'Creación' ? 'nueva' : r.accion === 'Eliminación' ? 'eliminada' : ''}">${esc(r.accion)}</span><b>${esc(r.matriz)}</b><span class="h-fecha">${esc(fechaHora(r.fecha))}</span></div>
       <p class="h-persona">${esc(r.nombre)} · Doc. ${esc(r.documento)}${(r.aplicadoA || []).length ? ` · también a ${esc(r.aplicadoA.join(', '))}` : ''}</p>
       ${r.justificacion ? `<p class="h-just"><b>Justificación:</b> ${esc(r.justificacion)}</p>` : ''}
       <details><summary>${(r.cambios || []).length} cambio${(r.cambios || []).length === 1 ? '' : 's'} realizado${(r.cambios || []).length === 1 ? '' : 's'}</summary>
@@ -1405,6 +1521,7 @@ document.addEventListener('click', async (e) => {
       b.innerHTML = txt; b.disabled = false;
       return;
     }
+    case 'eliminar-matriz': return ed && ed.modo === 'editar' ? dialogoEliminar() : undefined;
     case 'cancelar-edicion': return ir(ed && ed.modo === 'editar' ? { vista: 'editar' } : { vista: 'inicio' });
     case 'agregar-punto': {
       ed.borrador.puntos.push(puntoVacio());

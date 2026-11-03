@@ -385,6 +385,15 @@ label.btn:focus-within { outline: 3px solid var(--marca); outline-offset: 2px; }
 .h-item summary { cursor: pointer; font-weight: 600; font-size: 14px; color: var(--marca-texto); min-height: 32px; display: flex; align-items: center; }
 .etiqueta { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; background: var(--marca-suave); color: var(--marca-texto); }
 .etiqueta.nueva { background: var(--verde-fondo); color: var(--verde-tinta); }
+.etiqueta.eliminada { background: var(--rojo-fondo); color: var(--rojo-tinta); }
+.zona-peligro { border-color: var(--rojo-borde) !important; }
+.zona-peligro legend { color: var(--rojo); }
+.zona-peligro .btn { margin-bottom: 16px; }
+.btn-sec.btn-peligro { border-color: var(--rojo-borde); }
+.btn-peligro-lleno { background: var(--rojo); color: #fff; border: 0; }
+.btn-peligro-lleno:hover { filter: brightness(.92); }
+.btn-peligro-lleno:disabled { opacity: .6; }
+.d-icono.peligro { background: var(--rojo-fondo); color: var(--rojo); }
 
 .cargando, .estado-vacio { min-height: 50vh; display: grid; place-items: center; align-content: center; gap: 14px; text-align: center; padding: 40px 16px; color: var(--tinta-2); }
 .estado-vacio h1 { font-size: 26px; color: var(--tinta); }
