@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-04T10:03:01-05:00",
+ "actualizado": "2026-11-04T10:04:43-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8993,105 +8993,6 @@
    "modelo": "MIX5",
    "flota": "Mixkret",
    "plantilla": "putzmeister-mixkret-5"
-  },
-  {
-   "id": "H101",
-   "activo": "TELEHANDLER MANITOU MT-X625",
-   "codigo": "",
-   "lugar": "Proyecto Buriticá",
-   "fechaElaboracion": "2019-12-01",
-   "actualizado": null,
-   "imagen": "img/equipos/telehandler-manitou-mt-x625.jpg",
-   "puntos": [
-    {
-     "componente": "MOTOR",
-     "codigoLIS": "",
-     "lubricante": "DELO 400 SDE SAE 15W-40",
-     "cantidad": "3,1",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "150 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "150 Hrs (varilla de nivel)",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "CAJA REDUCTORA",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "0,8",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "300 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "300 Hrs (tapón llenado)",
-     "revisionNivel": "150 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "SISTEMA HIDRÁULICO",
-     "codigoLIS": "",
-     "lubricante": "Chevron Hydraulic Oil AW-M 68",
-     "cantidad": "24",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "2400 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "2400 Hrs (tapón llenado)",
-     "revisionNivel": "DIARIO (nivel de llenado)"
-    },
-    {
-     "componente": "DIFERENCIAL DELANTERO MANDO FINAL",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "1",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "600 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "600 Hrs (tapón llenado)",
-     "revisionNivel": "150 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "MANDOS FINALES DELANTEROS",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "0,5c/u",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "600 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "600 Hrs (tapón llenado)",
-     "revisionNivel": "150 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "DIFERENCIAL TRASERO",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "1",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "600 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "600 Hrs (tapón llenado)",
-     "revisionNivel": "150 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "MANDOS FINALES TRASEROS",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "0,5c/u",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "600 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "600 Hrs (tapón llenado)",
-     "revisionNivel": "150 Hrs (tapón llenado)"
-    }
-   ],
-   "fichas": [],
-   "advertencia": "Toda la información suministrada en estos documentos ha sido extraída del respectivo manual RDH respetando los derechos de autor.",
-   "primerosAuxilios": {},
-   "incendios": "",
-   "departamento": "Superintendencia de Mantenimiento Mecánico",
-   "foto": "img/fotos/telehandler-manitou-mt-x625.jpg",
-   "equipo": "H101",
-   "descripcion": "TELEHANDLER MT-X625T MANITOU H101",
-   "modelo": "MT-X625T",
-   "flota": "Telehandler",
-   "plantilla": "telehandler-manitou-mt-x625"
   },
   {
    "id": "H102",
