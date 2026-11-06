@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-06T11:03:03-05:00",
+ "actualizado": "2026-11-06T11:05:21-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -14335,7 +14335,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-06T11:03:03-05:00",
+   "actualizado": "2026-11-06T11:05:21-05:00",
    "imagen": "img/equipos/resemin-scissor-lift.jpg",
    "puntos": [
     {
@@ -14355,7 +14355,7 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 30",
      "cantidad": "5",
      "tarea": "Lubricado",
-     "intervaloCambio": "1000M H",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
      "intervaloMuestreo": "500 H",
      "revisionNivel": ""
