@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-06T11:13:50-05:00",
+ "actualizado": "2026-11-06T11:34:40-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -937,7 +937,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": null,
+   "actualizado": "2026-11-06T11:34:40-05:00",
    "imagen": "img/equipos/cat-excavadora-313d2l.jpg",
    "puntos": [
     {
@@ -946,9 +946,9 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "3,6",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -957,9 +957,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 10W",
      "cantidad": "22,7",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
@@ -968,9 +968,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 50",
      "cantidad": "0,8",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
@@ -979,9 +979,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 50",
      "cantidad": "0,8",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
@@ -990,7 +990,7 @@
      "lubricante": "Chevron ELC Antifreeze",
      "cantidad": "N/A",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
      "intervaloMuestreo": "",
      "revisionNivel": ""
