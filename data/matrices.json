@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-07T16:53:13-05:00",
+ "actualizado": "2026-11-07T17:03:48-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -937,7 +937,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-06T11:34:40-05:00",
+   "actualizado": "2026-11-07T17:03:48-05:00",
    "imagen": "img/equipos/cat-excavadora-313d2l.jpg",
    "puntos": [
     {
@@ -959,7 +959,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "1000 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -970,7 +970,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "1000 H",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -981,7 +981,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "1000 H",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -992,7 +992,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
