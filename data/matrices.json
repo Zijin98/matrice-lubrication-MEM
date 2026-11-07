@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-07T17:04:54-05:00",
+ "actualizado": "2026-11-07T17:12:28-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8667,7 +8667,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-06T12:06:42-05:00",
+   "actualizado": "2026-11-07T17:12:28-05:00",
    "imagen": "img/equipos/cat-excavadora-m317d2.jpg",
    "puntos": [
     {
@@ -8700,7 +8700,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "1000 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -8731,9 +8731,9 @@
      "lubricante": "Chevron ELC Antifreeze",
      "cantidad": "N/A",
      "tarea": "Lubricado",
-     "intervaloCambio": "2000 H",
+     "intervaloCambio": "N/A",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
