@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T11:45:46-05:00",
+ "actualizado": "2026-11-08T12:14:51-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -14335,7 +14335,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-06T11:05:21-05:00",
+   "actualizado": "2026-11-08T12:14:51-05:00",
    "imagen": "img/equipos/resemin-scissor-lift.jpg",
    "puntos": [
     {
@@ -14344,7 +14344,7 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "4",
      "tarea": "Lubricado",
-     "intervaloCambio": "250 H",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
      "intervaloMuestreo": "250 H",
      "revisionNivel": ""
@@ -14368,7 +14368,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
@@ -14401,7 +14401,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "M/A",
      "revisionNivel": ""
     }
    ],
