@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T09:42:12-05:00",
+ "actualizado": "2026-11-08T09:44:12-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -12646,7 +12646,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": null,
+   "actualizado": "2026-11-08T09:44:12-05:00",
    "imagen": "img/equipos/bobcat-s570.jpg",
    "puntos": [
     {
@@ -12655,9 +12655,9 @@
      "lubricante": "Chevron SDE SAE 15W40",
      "cantidad": "2,7",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "250 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -12666,9 +12666,9 @@
      "lubricante": "Chevron Hydraulic Oil AW-M 68",
      "cantidad": "10",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -12677,9 +12677,9 @@
      "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "9",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -12688,9 +12688,9 @@
      "lubricante": "Chevron ELC Antifreeze",
      "cantidad": "N/A",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
