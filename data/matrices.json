@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T15:36:09-05:00",
+ "actualizado": "2026-11-08T15:43:41-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -2583,7 +2583,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-07T18:01:38-05:00",
+   "actualizado": "2026-11-08T15:43:41-05:00",
    "imagen": "img/equipos/robojet-normet-30.jpg",
    "puntos": [
     {
@@ -2592,7 +2592,7 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "3,2",
      "tarea": "Lubricado",
-     "intervaloCambio": "250 H",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
      "intervaloMuestreo": "250 H",
      "revisionNivel": ""
