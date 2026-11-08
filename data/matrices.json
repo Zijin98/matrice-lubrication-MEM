@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T10:10:09-05:00",
+ "actualizado": "2026-11-08T10:10:59-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -21031,7 +21031,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-08T10:10:09-05:00",
+   "actualizado": "2026-11-08T10:10:59-05:00",
    "imagen": "img/equipos/dieci-zeus-37-8.jpg",
    "puntos": [
     {
@@ -21097,7 +21097,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
