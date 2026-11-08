@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T09:16:47-05:00",
+ "actualizado": "2026-11-08T09:20:30-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -1592,7 +1592,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": null,
+   "actualizado": "2026-11-08T09:20:30-05:00",
    "imagen": "img/equipos/cat-740-ej.jpg",
    "puntos": [
     {
@@ -1601,9 +1601,9 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "10,5",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "250 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -1612,9 +1612,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 30",
      "cantidad": "23,7",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -1623,9 +1623,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 10W",
      "cantidad": "66",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -1634,9 +1634,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 50",
      "cantidad": "47,4",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -1645,9 +1645,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 50",
      "cantidad": "4",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -1656,9 +1656,9 @@
      "lubricante": "Chevron ELC Antifreeze",
      "cantidad": "N/A",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
