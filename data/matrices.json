@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T11:30:37-05:00",
+ "actualizado": "2026-11-08T11:43:15-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -12280,7 +12280,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2022-01-19",
-   "actualizado": null,
+   "actualizado": "2026-11-08T11:43:15-05:00",
    "imagen": "img/equipos/manlift-genie-s-60x.jpg",
    "puntos": [
     {
@@ -12289,9 +12289,9 @@
      "lubricante": "DELO 400 SDE SAE 15W-40",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "250 Hrs",
+     "intervaloCambio": "500 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "125 Hrs (varilla de nivel)",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -12300,9 +12300,9 @@
      "lubricante": "",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "Tapón llenado",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": "Tapón llenado"
     },
     {
@@ -12322,9 +12322,9 @@
      "lubricante": "",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "Tapón llenado",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": "Tapón llenado"
     },
     {
@@ -12333,9 +12333,9 @@
      "lubricante": "",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "Tapón llenado",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": "Tapón llenado"
     }
    ],
