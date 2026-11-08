@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T10:38:59-05:00",
+ "actualizado": "2026-11-08T11:03:20-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -3760,7 +3760,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": null,
+   "actualizado": "2026-11-08T11:03:20-05:00",
    "imagen": "img/equipos/caterpillar-d7r.jpg",
    "puntos": [
     {
@@ -3769,9 +3769,9 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "7,2",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -3780,9 +3780,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 10W",
      "cantidad": "14,3",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -3791,9 +3791,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 50",
      "cantidad": "3,4",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -3802,9 +3802,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 30",
      "cantidad": "47",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -3813,9 +3813,9 @@
      "lubricante": "Chevron ELC Antifreeze",
      "cantidad": "N/A",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
