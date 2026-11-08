@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T11:11:21-05:00",
+ "actualizado": "2026-11-08T11:12:46-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -12468,7 +12468,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-08T09:40:22-05:00",
+   "actualizado": "2026-11-08T11:12:46-05:00",
    "imagen": "img/equipos/bobcat-s570.jpg",
    "puntos": [
     {
@@ -12477,7 +12477,7 @@
      "lubricante": "Chevron SDE SAE 15W40",
      "cantidad": "2,7",
      "tarea": "Lubricado",
-     "intervaloCambio": "250 H",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
      "intervaloMuestreo": "250 H",
      "revisionNivel": ""
