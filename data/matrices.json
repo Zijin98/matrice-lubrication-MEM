@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T10:27:49-05:00",
+ "actualizado": "2026-11-08T10:29:20-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -13780,7 +13780,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-06T10:32:19-05:00",
+   "actualizado": "2026-11-08T10:29:20-05:00",
    "imagen": "img/equipos/maclean-scissorlift.jpg",
    "puntos": [
     {
@@ -13800,9 +13800,9 @@
      "lubricante": "Chevron Hydraulic Oil AW-M 68",
      "cantidad": "26",
      "tarea": "Lubricado",
-     "intervaloCambio": "2000 H",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "1000 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -13813,7 +13813,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -13824,7 +13824,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -13833,9 +13833,9 @@
      "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "1,4",
      "tarea": "Lubricado",
-     "intervaloCambio": "2000 H",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "1000 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -13846,7 +13846,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
