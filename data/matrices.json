@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T10:23:42-05:00",
+ "actualizado": "2026-11-11T10:24:46-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -1832,7 +1832,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-11T10:21:40-05:00",
+   "actualizado": "2026-11-11T10:24:46-05:00",
    "imagen": "img/equipos/cat-938k.jpg",
    "puntos": [
     {
@@ -1874,9 +1874,9 @@
      "lubricante": "Chevron 1000 THF",
      "cantidad": "18,4",
      "tarea": "Lubricado",
-     "intervaloCambio": "1000 H",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "500H",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
