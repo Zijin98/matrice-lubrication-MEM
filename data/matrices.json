@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T10:12:02-05:00",
+ "actualizado": "2026-11-11T10:13:34-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -1037,7 +1037,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-07T18:38:20-05:00",
+   "actualizado": "2026-11-11T10:13:34-05:00",
    "imagen": "img/equipos/cat-retro-420f2.jpg",
    "puntos": [
     {
@@ -1046,7 +1046,7 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "2,4",
      "tarea": "Lubricado",
-     "intervaloCambio": "250 H",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
      "intervaloMuestreo": "250 H",
      "revisionNivel": ""
