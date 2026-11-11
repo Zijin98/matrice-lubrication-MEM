@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T10:16:36-05:00",
+ "actualizado": "2026-11-11T10:17:34-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -1259,7 +1259,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-07T16:49:41-05:00",
+   "actualizado": "2026-11-11T10:17:34-05:00",
    "imagen": "img/equipos/lubetruck-600r-rdh.jpg",
    "puntos": [
     {
@@ -1281,7 +1281,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
+     "intervaloMuestreo": "100O H",
      "revisionNivel": ""
     },
     {
