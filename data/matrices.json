@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T10:35:59-05:00",
+ "actualizado": "2026-11-11T10:41:39-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -2483,7 +2483,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-11T10:35:59-05:00",
+   "actualizado": "2026-11-11T10:41:39-05:00",
    "imagen": "img/equipos/robojet-normet-20.jpg",
    "puntos": [
     {
@@ -2503,7 +2503,7 @@
      "lubricante": "Chevron Hydraulic Oil AW-M 68",
      "cantidad": "20",
      "tarea": "Lubricado",
-     "intervaloCambio": "2000 H",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
      "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
