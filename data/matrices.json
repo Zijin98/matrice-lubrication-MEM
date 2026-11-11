@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T10:50:36-05:00",
+ "actualizado": "2026-11-11T10:51:59-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -3438,7 +3438,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-08T12:19:32-05:00",
+   "actualizado": "2026-11-11T10:51:59-05:00",
    "imagen": "img/equipos/resemin-boom-truck.jpg",
    "puntos": [
     {
@@ -3471,7 +3471,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "250 H",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
