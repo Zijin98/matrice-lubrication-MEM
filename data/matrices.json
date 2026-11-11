@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T13:06:05-05:00",
+ "actualizado": "2026-11-11T13:08:35-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -6693,7 +6693,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2022-01-19",
-   "actualizado": null,
+   "actualizado": "2026-11-11T13:08:35-05:00",
    "imagen": "img/equipos/plataforma-elevadora-gs-1930.jpg",
    "puntos": [
     {
@@ -6702,9 +6702,9 @@
      "lubricante": "",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "Varilla de nivel",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -6713,9 +6713,9 @@
      "lubricante": "",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "Tapón llenado",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": "Tapón llenado"
     },
     {
@@ -6724,9 +6724,9 @@
      "lubricante": "",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "Tapón llenado",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": "Nivel de llenado"
     },
     {
@@ -6735,9 +6735,9 @@
      "lubricante": "",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "Tapón llenado",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": "Tapón llenado"
     },
     {
@@ -6746,9 +6746,9 @@
      "lubricante": "",
      "cantidad": "",
      "tarea": "CAMBIO",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "DRENAJE",
-     "intervaloMuestreo": "Tapón llenado",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": "Tapón llenado"
     }
    ],
