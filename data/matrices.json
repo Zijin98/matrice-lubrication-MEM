@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T11:49:49-05:00",
+ "actualizado": "2026-11-11T11:51:07-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -6038,7 +6038,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-11T11:49:49-05:00",
+   "actualizado": "2026-11-11T11:51:07-05:00",
    "imagen": "img/equipos/bolter-ds311-3.jpg",
    "puntos": [
     {
@@ -6102,7 +6102,7 @@
      "lubricante": "Chevron cetus PAO ISO 46",
      "cantidad": "1,3",
      "tarea": "Lubricado",
-     "intervaloCambio": "250 N/A",
+     "intervaloCambio": "250 H",
      "metodo": "Manual",
      "intervaloMuestreo": "N/A",
      "revisionNivel": ""
