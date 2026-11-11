@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-08T15:43:41-05:00",
+ "actualizado": "2026-11-11T10:04:14-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -715,7 +715,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": null,
+   "actualizado": "2026-11-11T10:04:14-05:00",
    "imagen": "img/equipos/dieci-zeus-37-8.jpg",
    "puntos": [
     {
@@ -724,9 +724,9 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "2,7",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 h",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 h",
      "revisionNivel": ""
     },
     {
@@ -735,9 +735,9 @@
      "lubricante": "Chevron randon HD ISO 46",
      "cantidad": "37",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
@@ -746,9 +746,9 @@
      "lubricante": "Chevron 1000 THF",
      "cantidad": "0,45",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -757,9 +757,9 @@
      "lubricante": "Chevron 1000 THF",
      "cantidad": "4",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -768,9 +768,9 @@
      "lubricante": "Chevron 1000 THF",
      "cantidad": "0,5",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -779,9 +779,9 @@
      "lubricante": "Chevron ELC Antifreeze",
      "cantidad": "N/A",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
