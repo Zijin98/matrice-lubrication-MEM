@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T13:18:49-05:00",
+ "actualizado": "2026-11-11T13:21:41-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -20365,7 +20365,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-08T08:56:54-05:00",
+   "actualizado": "2026-11-11T13:21:41-05:00",
    "imagen": "img/equipos/komatsu-wa470-6r.jpg",
    "puntos": [
     {
@@ -20374,7 +20374,7 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "10",
      "tarea": "Lubricado",
-     "intervaloCambio": "250 H",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
      "intervaloMuestreo": "250 H",
      "revisionNivel": ""
