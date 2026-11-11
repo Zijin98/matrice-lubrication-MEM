@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T10:24:46-05:00",
+ "actualizado": "2026-11-11T10:26:32-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -2039,7 +2039,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-08T11:27:41-05:00",
+   "actualizado": "2026-11-11T10:26:32-05:00",
    "imagen": "img/equipos/cat-988k.jpg",
    "puntos": [
     {
@@ -2072,7 +2072,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "250 H",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
