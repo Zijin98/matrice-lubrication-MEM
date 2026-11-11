@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T11:45:54-05:00",
+ "actualizado": "2026-11-11T11:47:35-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -5916,7 +5916,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": null,
+   "actualizado": "2026-11-11T11:47:35-05:00",
    "imagen": "img/equipos/bolter-ds311-3.jpg",
    "puntos": [
     {
@@ -5925,9 +5925,9 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "4,1",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -5936,9 +5936,9 @@
      "lubricante": "Chevron Hydraulic Oil AW-M 68",
      "cantidad": "60,8",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
     },
     {
@@ -5947,9 +5947,9 @@
      "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "4",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -5958,9 +5958,9 @@
      "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "2",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "500 H",
      "revisionNivel": ""
     },
     {
@@ -5969,9 +5969,9 @@
      "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "0,7",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     },
     {
@@ -5980,9 +5980,9 @@
      "lubricante": "Chevron cetus PAO ISO 46",
      "cantidad": "1,3",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "250 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     },
     {
@@ -5991,9 +5991,9 @@
      "lubricante": "Chevron ELC Antifreeze",
      "cantidad": "N/A",
      "tarea": "Lubricado",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
