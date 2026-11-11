@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T13:11:05-05:00",
+ "actualizado": "2026-11-11T13:11:40-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8778,7 +8778,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-07T18:12:43-05:00",
+   "actualizado": "2026-11-11T13:11:40-05:00",
    "imagen": "img/equipos/putzmeister-mixkret-5.jpg",
    "puntos": [
     {
@@ -8787,7 +8787,7 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "2,4",
      "tarea": "Lubricado",
-     "intervaloCambio": "250 H",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
      "intervaloMuestreo": "250 H",
      "revisionNivel": ""
