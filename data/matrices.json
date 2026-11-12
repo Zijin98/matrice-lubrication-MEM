@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-12T14:05:09-05:00",
+ "actualizado": "2026-11-12T14:16:19-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -18123,7 +18123,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-12T14:05:09-05:00",
+   "actualizado": "2026-11-12T14:16:19-05:00",
    "imagen": "img/equipos/th540-sandvik.jpg",
    "puntos": [
     {
@@ -18143,9 +18143,9 @@
      "lubricante": "Chevron Delo TORQFORCE SAE 30",
      "cantidad": "22,5",
      "tarea": "Lubricado",
-     "intervaloCambio": "1000 H",
+     "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -18156,7 +18156,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "4000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "1000 H",
+     "intervaloMuestreo": "2000 H",
      "revisionNivel": ""
     },
     {
