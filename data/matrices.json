@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-12T14:02:24-05:00",
+ "actualizado": "2026-11-12T14:05:09-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -18123,7 +18123,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-12T13:59:51-05:00",
+   "actualizado": "2026-11-12T14:05:09-05:00",
    "imagen": "img/equipos/th540-sandvik.jpg",
    "puntos": [
     {
@@ -18132,9 +18132,9 @@
      "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
      "cantidad": "16,7",
      "tarea": "Lubricado",
-     "intervaloCambio": "500 H",
+     "intervaloCambio": "250 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "250 H",
+     "intervaloMuestreo": "125 H",
      "revisionNivel": ""
     },
     {
@@ -18154,7 +18154,7 @@
      "lubricante": "Chevron Hydraulic Oil AW-M 68",
      "cantidad": "60",
      "tarea": "Lubricado",
-     "intervaloCambio": "2000 H",
+     "intervaloCambio": "4000 H",
      "metodo": "Manual",
      "intervaloMuestreo": "1000 H",
      "revisionNivel": ""
@@ -18165,7 +18165,7 @@
      "lubricante": "Chevron Hydraulic Oil AW-M 68",
      "cantidad": "26,6",
      "tarea": "Lubricado",
-     "intervaloCambio": "1000 H",
+     "intervaloCambio": "4000 H",
      "metodo": "Manual",
      "intervaloMuestreo": "N/A",
      "revisionNivel": ""
@@ -18176,7 +18176,7 @@
      "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "32,8",
      "tarea": "Lubricado",
-     "intervaloCambio": "500 H",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
      "intervaloMuestreo": "500 H",
      "revisionNivel": ""
@@ -18187,7 +18187,7 @@
      "lubricante": "Chevron Delo Gear LS SAE 80W90",
      "cantidad": "4",
      "tarea": "Lubricado",
-     "intervaloCambio": "500 H",
+     "intervaloCambio": "1000 H",
      "metodo": "Manual",
      "intervaloMuestreo": "500 H",
      "revisionNivel": ""
