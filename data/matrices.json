@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-11T13:53:47-05:00",
+ "actualizado": "2026-11-12T13:55:40-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -11841,7 +11841,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2025-12-03",
-   "actualizado": null,
+   "actualizado": "2026-11-12T13:55:40-05:00",
    "imagen": "img/equipos/paus-pg-10-ha-g004.jpg",
    "puntos": [
     {
@@ -11927,9 +11927,9 @@
      "lubricante": "Chevron ELC Antifreeze",
      "cantidad": "2 GALONES",
      "tarea": "N/A",
-     "intervaloCambio": "",
+     "intervaloCambio": "2000 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "",
+     "intervaloMuestreo": "N/A",
      "revisionNivel": ""
     }
    ],
