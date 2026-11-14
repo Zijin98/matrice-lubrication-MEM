@@ -74,6 +74,7 @@ El token queda guardado **cifrado con la contraseña**: aunque alguien vea los a
 | Editor | **Editar matriz** → contraseña → elige el equipo → cambia datos o imágenes → **Guardar** → escribe nombre y documento → confirma. |
 | Editor | **Nueva matriz** → puede copiar los puntos de un equipo similar → guarda. El QR del equipo nuevo queda disponible enseguida. |
 | Editor | **Editar matriz** → elige el equipo → al final, **Eliminar matriz** → escribe el código del equipo, nombre, documento y justificación. Si era el último equipo de su modelo, el modelo desaparece del inicio. |
+| Editor | **Editar matriz** → **Paneles del inicio** → cambia el título y los textos del inicio y, por cada modelo, el nombre que se muestra, el texto y la foto del panel; puede ocultar un modelo del inicio (sus QR siguen funcionando) o eliminarlo con todas sus matrices. Pide nombre, documento y justificación. |
 | Supervisor | **Historial** → contraseña → ve quién cambió qué y cuándo. **CSV** lo descarga para Excel. |
 
 Los cambios guardados tardan **1 a 2 minutos** en verse en los celulares de los técnicos, el tiempo que GitHub tarda en publicar.

@@ -97,7 +97,7 @@ function leerRuta() {
   if (p.get('eq')) return { vista: 'matriz', id: p.get('eq') };
   const panel = p.get('panel');
   if (panel === 'editar') return { vista: 'editar', id: p.get('id') || '' };
-  if (panel === 'nueva' || panel === 'historial') return { vista: panel };
+  if (panel === 'nueva' || panel === 'historial' || panel === 'paneles') return { vista: panel };
   return { vista: 'inicio' };
 }
 function rutaURL(r) {
@@ -105,7 +105,7 @@ function rutaURL(r) {
   if (r.vista === 'unidad') return `${base}?u=${encodeURIComponent(r.codigo)}`;
   if (r.vista === 'matriz') return `${base}?eq=${encodeURIComponent(r.id)}`;
   if (r.vista === 'editar') return `${base}?panel=editar${r.id ? `&id=${encodeURIComponent(r.id)}` : ''}`;
-  if (r.vista === 'nueva' || r.vista === 'historial') return `${base}?panel=${r.vista}`;
+  if (r.vista === 'nueva' || r.vista === 'historial' || r.vista === 'paneles') return `${base}?panel=${r.vista}`;
   return base;
 }
 let rutaActual = { vista: 'inicio' };
@@ -121,6 +121,11 @@ window.addEventListener('popstate', async () => {
 });
 
 async function puedeSalirDelEditor(destino) {
+  if (rutaActual.vista === 'paneles' && destino.vista !== 'paneles' && estado.paneles) {
+    if (cambiosPaneles(estado.paneles).length && !(await confirmar({ titulo: '¿Descartar los cambios?', texto: 'Tiene cambios sin guardar en los paneles del inicio. Si sale ahora se perderán.', si: 'Descartar cambios', no: 'Seguir editando' }))) return false;
+    estado.paneles = null;
+    return true;
+  }
   const ed = estado.editor;
   if (!ed || rutaActual.vista === destino.vista && (destino.id || '__nueva') === ed.idRuta) return true;
   if (!['editar', 'nueva'].includes(rutaActual.vista) || !ed.borrador) return true;
@@ -136,13 +141,14 @@ async function render(r) {
   if (acc) acc.hidden = r.vista !== 'inicio';
   cerrarCapa(false);
   window.scrollTo(0, 0);
-  if (['editar', 'nueva', 'historial'].includes(r.vista)) {
+  if (['editar', 'nueva', 'historial', 'paneles'].includes(r.vista)) {
     if (!estado.sesion) {
       vistaInicio();
       const ok = await pedirClave();
       if (!ok) { history.replaceState({ vista: 'inicio' }, '', rutaURL({ vista: 'inicio' })); rutaActual = { vista: 'inicio' }; return; }
     }
     if (r.vista === 'historial') return vistaHistorial();
+    if (r.vista === 'paneles') return vistaPaneles();
     if (r.vista === 'nueva') return vistaEditor(null);
     if (r.id) return vistaEditor(r.id);
     return vistaSelector();
@@ -221,9 +227,24 @@ const unicos = (xs) => [...new Set(xs.filter(Boolean))];
 const buscarEquipo = (id) => estado.datos.equipos.find((e) => e.id === id) || estado.datos.equipos.find((e) => e.id.toUpperCase() === String(id || '').toUpperCase());
 const delModelo = (modelo) => estado.datos.equipos.filter((e) => e.modelo === modelo).sort((x, y) => x.equipo.localeCompare(y.equipo, 'es', { numeric: true }));
 const firma = (e) => JSON.stringify([e.puntos, e.fichas || [], e.imagen || '']);
+/** Configuración del panel de cada modelo en el inicio (nombre, texto, foto, oculto). */
+const cfgGrupo = (modelo, datos = estado.datos) => (datos.grupos || {})[modelo] || {};
+const grupoOculto = (modelo) => !!cfgGrupo(modelo).oculto;
+const textosInicio = (datos = estado.datos) => ({
+  eyebrow: plantilla().departamento || 'Departamento de Tribología',
+  titulo: 'Matrices de lubricación - MEM',
+  lead: `Cambio de aceite por equipo · ${lugarGeneral()}`,
+  ...Object.fromEntries(Object.entries(datos.inicio || {}).filter(([, v]) => norm(v))),
+});
+/** Valores por defecto del panel de un modelo, calculados de sus equipos. */
+function grupoPorDefecto(modelo) {
+  const todos = delModelo(modelo);
+  const conFoto = todos.find((e) => e.foto) || todos.find((e) => e.imagen);
+  return { nombre: modelo, texto: unicos(todos.map((e) => e.activo)).join(' · '), foto: conFoto ? (conFoto.foto || conFoto.imagen) : '' };
+}
 
 function textoBusqueda(eq) {
-  return sinAcentos([eq.equipo, eq.descripcion, eq.modelo, eq.flota, eq.activo,
+  return sinAcentos([eq.equipo, eq.descripcion, eq.modelo, eq.flota, eq.activo, cfgGrupo(eq.modelo).nombre, cfgGrupo(eq.modelo).texto,
     ...(eq.puntos || []).flatMap((p) => [p.componente, p.lubricante, p.codigoLIS])].join(' ')).toLowerCase();
 }
 function resaltar(texto, terminos) {
@@ -254,6 +275,7 @@ function pasaFiltros(e, excepto = '') {
 function listaFiltrada(q, usarFiltros = true) {
   const terminos = sinAcentos(q).toLowerCase().split(/\s+/).filter(Boolean);
   const lista = estado.datos.equipos.filter((e) => {
+    if (usarFiltros && grupoOculto(e.modelo)) return false;
     const t = textoBusqueda(e);
     if (!terminos.every((x) => t.includes(x))) return false;
     return !usarFiltros || pasaFiltros(e);
@@ -274,19 +296,19 @@ function tarjetaGrupo(g, terminos, accion, abierto) {
   const cuenta = new Map();
   todos.forEach((e) => { const f = firma(e); cuenta.set(f, (cuenta.get(f) || 0) + 1); });
   const comun = [...cuenta.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
-  const conFoto = todos.find((e) => e.foto) || todos.find((e) => e.imagen);
-  const foto = conFoto ? (conFoto.foto || conFoto.imagen) : '';
+  const def = grupoPorDefecto(g.modelo), cfg = cfgGrupo(g.modelo);
+  const foto = cfg.foto || def.foto;
   const flotas = unicos(todos.map((e) => e.flota)).join(' · ');
-  const nombres = unicos(todos.map((e) => e.activo));
+  const nombre = norm(cfg.nombre) || g.modelo, texto = norm(cfg.texto) || def.texto;
   const idp = `g-${clave(g.modelo)}`;
   const parcial = g.eqs.length < todos.length;
   return `<li class="grupo ${abierto ? 'abierto' : ''}" data-modelo="${esc(g.modelo)}">
     <button type="button" class="grupo-cab" aria-expanded="${abierto}" aria-controls="${idp}">
       <span class="miniatura foto">${foto ? `<img src="${esc(src(foto))}" alt="" loading="lazy">` : I('equipo')}</span>
       <span class="te-cuerpo">
-        <span class="te-nombre">${resaltar(g.modelo, terminos)}</span>
+        <span class="te-nombre">${resaltar(nombre, terminos)}${nombre !== g.modelo ? ` <small class="te-modelo">${esc(g.modelo)}</small>` : ''}${accion !== 'ver' && cfg.oculto ? ' <em class="propia">Oculto en el inicio</em>' : ''}</span>
         <span class="te-meta">${flotas ? `${resaltar(flotas, terminos)} · ` : ''}${parcial ? `${g.eqs.length} de ${todos.length}` : todos.length} equipo${todos.length === 1 ? '' : 's'}</span>
-        <span class="te-comp">${resaltar(nombres.join(' · '), terminos)}</span>
+        <span class="te-comp">${resaltar(texto, terminos)}</span>
       </span>
       <span class="grupo-flecha">${I('abajo')}</span>
     </button>
@@ -309,7 +331,7 @@ function tarjetaGrupo(g, terminos, accion, abierto) {
 function opcionesFiltro(f) {
   const cuenta = new Map();
   estado.datos.equipos.forEach((e) => {
-    if (!pasaFiltros(e, f)) return;
+    if (grupoOculto(e.modelo) || !pasaFiltros(e, f)) return;
     const v = e[f];
     if (!v) return;
     cuenta.set(v, (cuenta.get(v) || 0) + 1);
@@ -354,7 +376,7 @@ function montarBuscador(accion) {
     const { terminos, lista } = listaFiltrada(input.value, !!caja);
     limpiar.hidden = !input.value;
     const grupos = agrupar(lista);
-    const total = estado.datos.equipos.length;
+    const total = estado.datos.equipos.filter((e) => !caja || !grupoOculto(e.modelo)).length;
     const activo = terminos.length || (caja && hayFiltros());
     $('#conteo').textContent = activo
       ? `${lista.length} de ${total} equipos · ${grupos.length} modelo${grupos.length === 1 ? '' : 's'}`
@@ -439,9 +461,9 @@ function vistaInicio() {
   document.title = 'Matrices de lubricación - MEM · Zijin-Continental Gold';
   app.innerHTML = `
   <section class="portada contenedor">
-    <p class="eyebrow">${esc(plantilla().departamento || 'Departamento de Tribología')}</p>
-    <h1>Matrices de lubricación - MEM</h1>
-    <p class="lead">Cambio de aceite por equipo · ${esc(lugarGeneral())}</p>
+    <p class="eyebrow">${esc(textosInicio().eyebrow)}</p>
+    <h1>${esc(textosInicio().titulo)}</h1>
+    <p class="lead">${esc(textosInicio().lead)}</p>
     ${htmlBuscador('Buscar equipo, modelo, componente o lubricante')}
     ${htmlFiltros()}
   </section>
@@ -725,6 +747,10 @@ function vistaSelector() {
   app.innerHTML = `${barraAdmin('Editar matriz')}
   <section class="contenedor vista-admin">
     ${bannerSinToken()}
+    <a class="tarjeta-paneles" href="?panel=paneles" data-ir-paneles>
+      <span class="miniatura">${I('lapiz')}</span>
+      <span><b>Paneles del inicio</b><small>Títulos y textos del inicio, nombre, texto y foto de cada modelo, ocultar o eliminar modelos completos.</small></span>
+      ${I('der', 'i-peq')}</a>
     <h1>¿Qué equipo desea editar?</h1>
     <p class="lead">Cada equipo tiene su propia matriz. Despliegue el modelo y seleccione el equipo.</p>
     ${htmlBuscador('Buscar equipo, modelo o flota')}
@@ -732,6 +758,251 @@ function vistaSelector() {
     <ul class="tarjetas grupos" id="lista"></ul>
   </section>`;
   montarBuscador('editar');
+}
+
+/* ------------------------------------------------ Paneles del inicio */
+function vistaPaneles() {
+  document.title = 'Paneles del inicio';
+  if (!estado.paneles) {
+    const inicio = { eyebrow: '', titulo: '', lead: '', ...(estado.datos.inicio || {}) };
+    estado.paneles = {
+      inicioOriginal: clonar(inicio), inicio: clonar(inicio),
+      gruposOriginal: clonar(estado.datos.grupos || {}), grupos: clonar(estado.datos.grupos || {}),
+      eliminar: new Set(), pendientes: {}, q: '', abiertos: new Set(),
+    };
+  }
+  const pn = estado.paneles, def = textosInicio({ inicio: {} });
+  app.innerHTML = `${barraAdmin('Paneles del inicio', { vista: 'editar' })}
+  <form class="contenedor vista-admin" id="f-paneles" novalidate>
+    ${bannerSinToken()}
+    <h1>Paneles del inicio</h1>
+    <p class="lead">Cambie lo que ven los técnicos en la página de inicio. Las matrices de los equipos no cambian, salvo que elimine un modelo completo.</p>
+    <fieldset class="ed-seccion"><legend>Textos del inicio</legend>
+      <p class="ayuda">Deje un campo vacío para usar el texto original (se muestra en gris).</p>
+      <label class="campo"><span>Encabezado pequeño (arriba del título)</span><input data-ini="eyebrow" value="${esc(pn.inicio.eyebrow || '')}" placeholder="${esc(def.eyebrow)}" autocomplete="off"></label>
+      <label class="campo"><span>Título</span><input data-ini="titulo" value="${esc(pn.inicio.titulo || '')}" placeholder="${esc(def.titulo)}" autocomplete="off"></label>
+      <label class="campo"><span>Texto bajo el título</span><input data-ini="lead" value="${esc(pn.inicio.lead || '')}" placeholder="${esc(def.lead)}" autocomplete="off"></label>
+    </fieldset>
+    <fieldset class="ed-seccion"><legend>Paneles de modelos</legend>
+      <p class="ayuda">Cada panel del inicio agrupa los equipos de un modelo. Puede cambiar el nombre que se muestra, el texto y la foto, ocultarlo del inicio (sus QR siguen funcionando) o eliminar el modelo con todas sus matrices.</p>
+      ${htmlBuscador('Buscar modelo, flota o equipo')}
+      <p class="conteo" id="p-conteo"></p>
+      <ul class="paneles-lista" id="p-lista"></ul>
+    </fieldset>
+    <div class="ed-acciones"><div class="contenedor">
+      <button type="button" class="btn btn-fantasma" data-accion="cancelar-paneles">Cancelar</button>
+      <button type="submit" class="btn btn-primario">${I('check')} Guardar cambios</button>
+    </div></div>
+  </form>`;
+  const f = $('#f-paneles'), q = $('#q');
+  q.value = pn.q;
+  $('#q-limpiar').hidden = !pn.q;
+  q.addEventListener('input', debounce(() => { pn.q = q.value; $('#q-limpiar').hidden = !q.value; pintarPaneles(); }, 80));
+  $('#q-limpiar').addEventListener('click', () => { q.value = pn.q = ''; $('#q-limpiar').hidden = true; pintarPaneles(); q.focus(); });
+  f.addEventListener('input', (e) => {
+    const t = e.target;
+    if (t.dataset.ini) pn.inicio[t.dataset.ini] = t.value;
+    if (t.dataset.gk) {
+      const m = t.closest('[data-panel]').dataset.panel;
+      pn.grupos[m] = { ...(pn.grupos[m] || {}), [t.dataset.gk]: t.type === 'checkbox' ? t.checked : t.value };
+      if (t.type === 'checkbox') pintarPaneles();
+    }
+  });
+  f.addEventListener('change', async (e) => {
+    const t = e.target;
+    if (t.dataset.gfoto === undefined || !t.files || !t.files[0]) return;
+    const m = t.closest('[data-panel]').dataset.panel;
+    try {
+      toast('Procesando imagen…');
+      const r = await procesarImagen(t.files[0], { maxLado: 900 });
+      const ruta = `img/fotos/modelo-${clave(m) || 'grupo'}-${Date.now().toString(36)}.jpg`;
+      pn.pendientes[ruta] = r; estado.imagenesLocales[ruta] = r.url;
+      pn.grupos[m] = { ...(pn.grupos[m] || {}), foto: ruta };
+      pintarPaneles();
+      toast('Foto lista. Se subirá al guardar.');
+    } catch (x) { toast(x.message || 'No se pudo cargar la imagen', 'error'); }
+  });
+  f.addEventListener('click', (e) => {
+    const cab = e.target.closest('.panel-cab');
+    if (cab) {
+      const m = cab.closest('[data-panel]').dataset.panel;
+      if (pn.abiertos.has(m)) pn.abiertos.delete(m); else pn.abiertos.add(m);
+      pintarPaneles();
+    }
+  });
+  f.addEventListener('submit', (e) => { e.preventDefault(); registrarPaneles(); });
+  pintarPaneles();
+}
+
+function pintarPaneles() {
+  const pn = estado.paneles;
+  if (!pn || !$('#p-lista')) return;
+  const terminos = sinAcentos(pn.q).toLowerCase().split(/\s+/).filter(Boolean);
+  const grupos = agrupar(estado.datos.equipos).filter((g) => {
+    const c = pn.grupos[g.modelo] || {};
+    const t = sinAcentos([g.modelo, c.nombre, c.texto, ...g.eqs.flatMap((e) => [e.equipo, e.flota, e.activo])].join(' ')).toLowerCase();
+    return terminos.every((x) => t.includes(x));
+  });
+  $('#p-conteo').textContent = `${grupos.length} modelo${grupos.length === 1 ? '' : 's'}${pn.eliminar.size ? ` · ${pn.eliminar.size} por eliminar al guardar` : ''}`;
+  $('#p-lista').innerHTML = grupos.length ? grupos.map((g) => {
+    const m = g.modelo, c = pn.grupos[m] || {}, d = grupoPorDefecto(m), del = pn.eliminar.has(m), abierto = pn.abiertos.has(m);
+    const foto = c.foto || d.foto, flotas = unicos(g.eqs.map((e) => e.flota)).join(' · ');
+    return `<li class="panel-ed ${del ? 'por-eliminar' : ''} ${abierto ? 'abierto' : ''}" data-panel="${esc(m)}">
+      <button type="button" class="panel-cab" aria-expanded="${abierto}">
+        <span class="miniatura foto">${foto ? `<img src="${esc(src(foto))}" alt="" loading="lazy">` : I('equipo')}</span>
+        <span class="te-cuerpo"><span class="te-nombre">${esc(norm(c.nombre) || m)}${norm(c.nombre) && norm(c.nombre) !== m ? ` <small class="te-modelo">${esc(m)}</small>` : ''}</span>
+          <span class="te-meta">${flotas ? `${esc(flotas)} · ` : ''}${g.eqs.length} equipo${g.eqs.length === 1 ? '' : 's'}${c.oculto ? ' · <b>Oculto</b>' : ''}${del ? ' · <b class="txt-rojo">Se eliminará al guardar</b>' : ''}</span></span>
+        <span class="grupo-flecha">${I('abajo')}</span>
+      </button>
+      ${abierto ? `<div class="panel-cuerpo">${del ? `<p class="aviso-rojo">${I('alerta')}<span>Al guardar se ${g.eqs.length === 1 ? 'eliminará la matriz' : `eliminarán las ${g.eqs.length} matrices`} de este modelo (${esc(g.eqs.map((e) => e.equipo).join(', '))}) y el panel desaparece del inicio.</span></p>
+          <button type="button" class="btn btn-sec" data-accion="restaurar-modelo" data-modelo="${esc(m)}">${I('izq')} No eliminar</button>` : `
+        <label class="campo"><span>Nombre que se muestra</span><input data-gk="nombre" value="${esc(c.nombre || '')}" placeholder="${esc(m)}" autocomplete="off"><small>Vacío = nombre del modelo (${esc(m)}). El modelo en el IH08 y los filtros no cambian.</small></label>
+        <label class="campo"><span>Texto del panel</span><textarea data-gk="texto" rows="2" placeholder="${esc(d.texto)}">${esc(c.texto || '')}</textarea><small>Vacío = nombre de las matrices de sus equipos.</small></label>
+        <div class="ed-lub" style="border:0;padding-left:0">
+          <span class="miniatura foto" style="width:80px;height:80px">${foto ? `<img src="${esc(src(foto))}" alt="Foto del panel">` : I('equipo')}</span>
+          <div><b>${c.foto ? 'Foto propia del panel' : d.foto ? 'Foto tomada de un equipo' : 'Sin foto'}</b><small>Se muestra en el panel del inicio.</small></div>
+        </div>
+        <div class="fila-botones">
+          <label class="btn btn-sec btn-peq">${I('imagen')} ${c.foto ? 'Cambiar foto' : 'Subir foto'}<input type="file" accept="image/*" data-gfoto class="visual-oculto"></label>
+          ${c.foto ? `<button type="button" class="btn btn-fantasma btn-peq" data-accion="quitar-foto-grupo" data-modelo="${esc(m)}">${I('x')} Usar la foto del equipo</button>` : ''}
+        </div>
+        <label class="check-fila"><input type="checkbox" data-gk="oculto" ${c.oculto ? 'checked' : ''}> <span><b>Ocultar en el inicio</b><small>El panel no se muestra en el inicio ni en los filtros, pero los QR de sus equipos siguen abriendo su matriz.</small></span></label>
+        <div class="zona-peligro-mini">
+          <button type="button" class="btn btn-sec btn-peligro btn-peq" data-accion="eliminar-modelo" data-modelo="${esc(m)}">${I('basura')} Eliminar modelo y sus ${g.eqs.length} matriz${g.eqs.length === 1 ? '' : 'ces'}</button>
+        </div>`}</div>` : ''}
+    </li>`;
+  }).join('') : '<li class="sin-resultados">Ningún modelo coincide con la búsqueda.</li>';
+}
+
+const ETQ_INI = { eyebrow: 'Encabezado pequeño del inicio', titulo: 'Título del inicio', lead: 'Texto bajo el título del inicio' };
+function cambiosPaneles(pn) {
+  const out = [];
+  Object.keys(ETQ_INI).forEach((k) => { if (norm(pn.inicioOriginal[k]) !== norm(pn.inicio[k])) out.push(`${ETQ_INI[k]}: ${fmt(pn.inicioOriginal[k])} → ${fmt(pn.inicio[k])}`); });
+  const ms = new Set([...Object.keys(pn.grupos), ...Object.keys(pn.gruposOriginal)]);
+  [...ms].sort().forEach((m) => {
+    if (pn.eliminar.has(m)) return;
+    const a = pn.gruposOriginal[m] || {}, b = pn.grupos[m] || {};
+    if (norm(a.nombre) !== norm(b.nombre)) out.push(`Panel ${m} · Nombre: ${fmt(a.nombre)} → ${fmt(b.nombre)}`);
+    if (norm(a.texto) !== norm(b.texto)) out.push(`Panel ${m} · Texto: ${fmt(a.texto)} → ${fmt(b.texto)}`);
+    if (norm(a.foto) !== norm(b.foto)) out.push(`Panel ${m} · Foto ${!b.foto ? 'propia quitada (usa la del equipo)' : a.foto ? 'reemplazada' : 'agregada'}`);
+    if (!!a.oculto !== !!b.oculto) out.push(`Panel ${m}: ${b.oculto ? 'oculto en el inicio' : 'visible de nuevo en el inicio'}`);
+  });
+  [...pn.eliminar].sort().forEach((m) => {
+    const eqs = delModelo(m);
+    out.push(`Eliminación del modelo ${m} con ${eqs.length} matriz${eqs.length === 1 ? '' : 'ces'}: ${eqs.map((e) => e.equipo).join(', ')}`);
+  });
+  return out;
+}
+
+function registrarPaneles() {
+  const pn = estado.paneles, cambios = cambiosPaneles(pn);
+  if (!cambios.length) { toast('No hay cambios para guardar'); return; }
+  const borra = [...pn.eliminar], nEq = borra.reduce((n, m) => n + delModelo(m).length, 0);
+  abrirCapa(`<form class="dialogo dialogo-ancho" id="f-regp" role="dialog" aria-modal="true" aria-labelledby="t-regp" novalidate>
+    <div class="d-icono ${borra.length ? 'peligro' : ''}">${I(borra.length ? 'basura' : 'doc')}</div>
+    <h2 id="t-regp">Registro del cambio</h2>
+    <p>Antes de guardar, identifíquese. Estos datos quedan en el historial de cambios.</p>
+    <label class="campo"><span>Nombre de la persona que actualiza <span class="req">*</span></span><input id="p-nombre" autocomplete="name" required></label>
+    <label class="campo"><span>Documento de identificación <span class="req">*</span></span><input id="p-doc" autocomplete="off" required></label>
+    <label class="campo"><span>Justificación del cambio <span class="req">*</span></span><textarea id="p-just" rows="3" required placeholder="Ej.: Nombres de flota según nomenclatura de mina / modelo dado de baja"></textarea></label>
+    ${borra.length ? `<label class="check-fila aviso-rojo"><input type="checkbox" id="p-conf"> <span><b>Entiendo que se eliminarán ${nEq} matriz${nEq === 1 ? '' : 'ces'} de ${borra.length} modelo${borra.length === 1 ? '' : 's'} (${esc(borra.join(', '))}).</b></span></label>` : ''}
+    <div class="resumen">
+      <h3>Se registra automáticamente</h3>
+      <dl><dt>Fecha</dt><dd>${esc(fechaHora(ahoraISO()))}</dd><dt>Cambio</dt><dd>Paneles del inicio</dd></dl>
+      <h3>Cambios realizados (${cambios.length})</h3>
+      <ul class="cambios">${cambios.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+    </div>
+    <p class="error" id="p-error" hidden></p>
+    <div id="p-progreso"></div>
+    <div class="d-acciones"><button type="button" class="btn btn-fantasma" data-cerrar>Volver a editar</button><button type="submit" class="btn ${borra.length ? 'btn-peligro-lleno' : 'btn-primario'}" id="p-ok">${I('check')} Confirmar y guardar</button></div>
+  </form>`);
+  const f = $('#f-regp');
+  f.addEventListener('input', (e) => { e.target.closest('.campo')?.classList.remove('invalido'); $('#p-error').hidden = true; });
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nombre = norm($('#p-nombre').value), doc = norm($('#p-doc').value), just = norm($('#p-just').value), err = $('#p-error');
+    $$('.campo', f).forEach((c) => c.classList.remove('invalido'));
+    const faltan = [];
+    if (nombre.length < 3) { faltan.push('el nombre completo'); $('#p-nombre').closest('.campo').classList.add('invalido'); }
+    if (doc.length < 4) { faltan.push('el documento de identificación'); $('#p-doc').closest('.campo').classList.add('invalido'); }
+    if (just.length < 10) { faltan.push('la justificación (mínimo 10 caracteres)'); $('#p-just').closest('.campo').classList.add('invalido'); }
+    if (borra.length && !$('#p-conf').checked) faltan.push('confirmar la eliminación');
+    if (faltan.length) { err.textContent = `Falta ${faltan.length > 1 ? `${faltan.slice(0, -1).join(', ')} y ${faltan.at(-1)}` : faltan[0]}.`; err.hidden = false; return; }
+    const btn = $('#p-ok');
+    btn.disabled = true; f.setAttribute('data-ocupado', '');
+    $$('[data-cerrar]', f).forEach((x) => { x.disabled = true; });
+    const prog = (t) => { $('#p-progreso').innerHTML = `<p class="progreso"><span class="giro" aria-hidden="true"></span>${esc(t)}</p>`; };
+    try {
+      await guardarPanelesEnGitHub(pn, { nombre, documento: doc, justificacion: just, accion: borra.length ? 'Paneles del inicio y eliminación' : 'Paneles del inicio', matriz: 'Inicio', aplicadoA: borra, cambios }, prog);
+      estado.paneles = null;
+      abrirCapa(`<div class="dialogo" role="dialog" aria-modal="true" aria-labelledby="t-pok">
+        <div class="d-icono ok">${I('check')}</div>
+        <h2 id="t-pok">Cambios guardados</h2>
+        <p>Los paneles del inicio quedaron guardados y registrados en el historial.${borra.length ? ` Se eliminaron ${nEq} matriz${nEq === 1 ? '' : 'ces'}.` : ''} Los técnicos verán el cambio en 1 a 2 minutos.</p>
+        <div class="d-acciones"><button type="button" class="btn btn-primario" id="pok-inicio">Ver el inicio</button></div>
+      </div>`, { alCerrar: () => ir({ vista: 'inicio' }) });
+      $('#pok-inicio').onclick = () => { cerrarCapa(false); ir({ vista: 'inicio' }); };
+    } catch (x) {
+      console.error(x);
+      $('#p-progreso').innerHTML = '';
+      err.textContent = x.message || 'No se pudo guardar. Intente de nuevo.';
+      err.hidden = false;
+      btn.disabled = false; f.removeAttribute('data-ocupado');
+      $$('[data-cerrar]', f).forEach((y) => { y.disabled = false; });
+    }
+  });
+}
+
+async function guardarPanelesEnGitHub(pn, registro, progreso) {
+  const s = estado.sesion;
+  if (!s || !s.token) throw new Error('El guardado en línea no está activado. Configure el token de GitHub en configurar.html (paso 4 de la guía).');
+  const repo = new Repo({ ...datosRepo(estado.config), token: s.token });
+  for (let intento = 0; ; intento++) {
+    try {
+      progreso('Leyendo la versión más reciente…');
+      const txt = await repo.leerTexto('data/matrices.json');
+      const remoto = txt ? JSON.parse(txt) : clonar(estado.datos);
+      remoto.equipos = remoto.equipos || [];
+      const ahora = ahoraISO();
+      // Textos del inicio: solo se guardan los que no están vacíos
+      const ini = Object.fromEntries(Object.keys(ETQ_INI).map((k) => [k, norm(pn.inicio[k])]).filter(([, v]) => v));
+      if (Object.keys(ini).length) remoto.inicio = ini; else delete remoto.inicio;
+      // Paneles: solo los modelos que cambiaron en esta edición
+      remoto.grupos = remoto.grupos || {};
+      const ms = new Set([...Object.keys(pn.grupos), ...Object.keys(pn.gruposOriginal)]);
+      ms.forEach((m) => {
+        if (JSON.stringify(pn.grupos[m] || {}) === JSON.stringify(pn.gruposOriginal[m] || {})) return;
+        const c = pn.grupos[m] || {};
+        const limpio = Object.fromEntries([['nombre', norm(c.nombre)], ['texto', norm(c.texto)], ['foto', norm(c.foto)], ['oculto', !!c.oculto]].filter(([, v]) => v));
+        if (Object.keys(limpio).length) remoto.grupos[m] = limpio; else delete remoto.grupos[m];
+      });
+      // Eliminar modelos completos
+      const borrados = [];
+      pn.eliminar.forEach((m) => {
+        remoto.equipos.filter((e) => (e.modelo || '') === m).forEach((e) => borrados.push(e.equipo));
+        remoto.equipos = remoto.equipos.filter((e) => (e.modelo || '') !== m);
+        delete remoto.grupos[m];
+      });
+      if (!Object.keys(remoto.grupos).length) delete remoto.grupos;
+      remoto.actualizado = ahora;
+
+      progreso('Actualizando el historial de cambios…');
+      const histNuevo = await agregarAlHistorial(repo, { fecha: ahora, ...registro, aplicadoA: borrados });
+
+      progreso('Guardando en GitHub…');
+      const usadas = new Set(Object.values(remoto.grupos || {}).map((g) => g.foto));
+      await repo.commit([
+        { ruta: 'data/matrices.json', texto: `${JSON.stringify(remoto, null, 1)}\n` },
+        { ruta: 'data/historial.json', texto: `${JSON.stringify(histNuevo, null, 2)}\n` },
+        ...Object.entries(pn.pendientes).filter(([r]) => usadas.has(r)).map(([ruta, p]) => ({ ruta, base64: p.base64 })),
+      ], `Actualiza paneles del inicio${pn.eliminar.size ? ` y elimina ${[...pn.eliminar].join(', ')}` : ''}`);
+      estado.datos = remoto;
+      return;
+    } catch (e) {
+      if (intento === 0 && (e.estado === 409 || e.estado === 422)) continue;
+      throw e;
+    }
+  }
 }
 
 /* ------------------------------------------------------------- Editor */
@@ -1468,13 +1739,14 @@ function descargarCSV() {
 
 /* ------------------------------------------------------- Eventos globales */
 document.addEventListener('click', async (e) => {
-  const a = e.target.closest('a[data-nav], a[data-ir], a[data-editar], a[data-volver], a[data-unidad-ir]');
+  const a = e.target.closest('a[data-nav], a[data-ir], a[data-editar], a[data-volver], a[data-unidad-ir], a[data-ir-paneles]');
   if (a && !e.ctrlKey && !e.metaKey && !e.shiftKey && e.button === 0) {
     e.preventDefault();
     if (a.dataset.nav === 'inicio') return ir({ vista: 'inicio' });
     if (a.dataset.ir) return ir({ vista: 'matriz', id: a.dataset.ir });
     if (a.dataset.unidadIr) return ir({ vista: 'unidad', codigo: a.dataset.unidadIr });
     if (a.dataset.editar) return ir({ vista: 'editar', id: a.dataset.editar });
+    if (a.dataset.irPaneles !== undefined) return ir({ vista: 'paneles' });
     if (a.dataset.volver) return ir(JSON.parse(a.dataset.volver));
   }
   const b = e.target.closest('[data-accion]');
@@ -1520,6 +1792,17 @@ document.addEventListener('click', async (e) => {
       catch (x) { console.error(x); toast('No se pudo generar el ZIP', 'error'); }
       b.innerHTML = txt; b.disabled = false;
       return;
+    }
+    case 'cancelar-paneles': return ir({ vista: 'editar' });
+    case 'eliminar-modelo': case 'restaurar-modelo': {
+      const pn = estado.paneles; if (!pn) return;
+      if (acc === 'eliminar-modelo') pn.eliminar.add(b.dataset.modelo); else pn.eliminar.delete(b.dataset.modelo);
+      return pintarPaneles();
+    }
+    case 'quitar-foto-grupo': {
+      const pn = estado.paneles; if (!pn) return;
+      const m = b.dataset.modelo; pn.grupos[m] = { ...(pn.grupos[m] || {}) }; delete pn.grupos[m].foto;
+      return pintarPaneles();
     }
     case 'eliminar-matriz': return ed && ed.modo === 'editar' ? dialogoEliminar() : undefined;
     case 'cancelar-edicion': return ir(ed && ed.modo === 'editar' ? { vista: 'editar' } : { vista: 'inicio' });

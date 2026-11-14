@@ -2,7 +2,7 @@
 // - Guarda la página y, en segundo plano, todas las matrices con sus imágenes.
 // - Con señal: muestra lo más reciente. Con señal débil (más de 3 s) o sin señal:
 //   muestra al instante la copia guardada en el celular.
-const CACHE = 'matrices-v3';
+const CACHE = 'matrices-v4';
 const ESPERA_MS = 3000;
 const BASICOS = [
   './', 'index.html', 'css/app.css', 'js/app.js', 'js/util.js', 'js/qr.js', 'js/exportar.js', 'js/cripto.js', 'js/github.js',
@@ -102,6 +102,7 @@ async function precargar() {
     const d = await res.json();
     const rutas = new Set();
     (d.equipos || []).forEach((e) => { if (e.imagen) rutas.add(e.imagen); if (e.foto) rutas.add(e.foto); });
+    Object.values(d.grupos || {}).forEach((g) => { if (g.foto) rutas.add(g.foto); });
     Object.values(d.lubricantes || {}).forEach((l) => { if (l.imagen) rutas.add(l.imagen); });
     Object.values(d.lis || {}).forEach((r) => rutas.add(r));
     const lista = [...rutas].map(local);
