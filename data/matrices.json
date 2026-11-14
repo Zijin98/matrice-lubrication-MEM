@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-14T11:44:59-05:00",
+ "actualizado": "2026-11-14T11:53:05-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -9341,72 +9341,6 @@
    "foto": "img/fotos/kawasaki-mule-ppro-dtx.jpg",
    "equipo": "U029",
    "descripcion": "UTILITY MULE PRO-DXT KAWASAKI U029",
-   "modelo": "MULE PRO-DXT",
-   "flota": "Utility Mule",
-   "plantilla": "kawasaki-mule-ppro-dtx"
-  },
-  {
-   "id": "U030",
-   "activo": "KAWASAKI MULE PPRO-DTX",
-   "codigo": "",
-   "lugar": "Proyecto Buriticá",
-   "fechaElaboracion": "2019-12-01",
-   "actualizado": null,
-   "imagen": "img/equipos/kawasaki-mule-ppro-dtx.jpg",
-   "puntos": [
-    {
-     "componente": "MOTOR",
-     "codigoLIS": "",
-     "lubricante": "DELO 400 SDE SAE 15W-40",
-     "cantidad": "0,6",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "80 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "80 Hrs (varilla de nivel)",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "CAJA REDUCTORA",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "0,6",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "160 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "160 Hrs (tapón llenado)",
-     "revisionNivel": "80 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "DIFERENCIAL DELANTERO",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "0,5",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "320 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "320 Hrs (tapón llenado)",
-     "revisionNivel": "80 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "DIFERENCIAL TRASERO",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "0,5",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "320 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "320 Hrs (tapón llenado)",
-     "revisionNivel": "80 Hrs (tapón llenado)"
-    }
-   ],
-   "fichas": [],
-   "advertencia": "Toda la información suministrada en estos documentos ha sido extraída del respectivo manual RDH respetando los derechos de autor.",
-   "primerosAuxilios": {},
-   "incendios": "",
-   "departamento": "Superintendencia de Mantenimiento Mecánico",
-   "foto": "img/fotos/kawasaki-mule-ppro-dtx.jpg",
-   "equipo": "U030",
-   "descripcion": "UTILITY MULE PRO-DXT KAWASAKI U030",
    "modelo": "MULE PRO-DXT",
    "flota": "Utility Mule",
    "plantilla": "kawasaki-mule-ppro-dtx"
