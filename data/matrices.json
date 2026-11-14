@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-14T11:42:12-05:00",
+ "actualizado": "2026-11-14T11:42:42-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -14021,105 +14021,6 @@
    "modelo": "SPM4210",
    "flota": "Robojet",
    "plantilla": "putzmeister-spm-4210"
-  },
-  {
-   "id": "M103",
-   "activo": "NEW HOLLAND SERVICE TRACTOR TD95",
-   "codigo": "",
-   "lugar": "Proyecto Buriticá",
-   "fechaElaboracion": "2019-05-09",
-   "actualizado": null,
-   "imagen": "img/equipos/new-holland-service-tractor-td95.jpg",
-   "puntos": [
-    {
-     "componente": "MOTOR",
-     "codigoLIS": "",
-     "lubricante": "DELO 400 SDE SAE 15W-40",
-     "cantidad": "3",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "250 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "125 Hrs (varilla de nivel)",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "TRANSMISIÓN",
-     "codigoLIS": "",
-     "lubricante": "DELO TORQFORCE SAE 30",
-     "cantidad": "12",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "500 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "500 Hrs (tapón llenado)",
-     "revisionNivel": "250 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "SISTEMA HIDRÁULICO",
-     "codigoLIS": "",
-     "lubricante": "Chevron Hydraulic Oil AW 46",
-     "cantidad": "12",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "2000 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "1000 Hrs (tapón llenado)",
-     "revisionNivel": "DIARIO (nivel de llenado)"
-    },
-    {
-     "componente": "DIFERENCIAL DELANTERO MANDO FINAL",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "1,4",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "1000 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "500 Hrs (tapón llenado)",
-     "revisionNivel": "250 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "MANDOS FINALES DELANTEROS",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "0,3",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "1000 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "500 Hrs (tapón llenado)",
-     "revisionNivel": "250 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "DIFERENCIAL TRASERO",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "1,4",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "1000 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "500 Hrs (tapón llenado)",
-     "revisionNivel": "250 Hrs (tapón llenado)"
-    },
-    {
-     "componente": "MANDOS FINALES TRASEROS",
-     "codigoLIS": "",
-     "lubricante": "DELO GEAR LS SAE 80W-90",
-     "cantidad": "0,3",
-     "tarea": "CAMBIO",
-     "intervaloCambio": "1000 Hrs",
-     "metodo": "DRENAJE",
-     "intervaloMuestreo": "500 Hrs (tapón llenado)",
-     "revisionNivel": "250 Hrs (tapón llenado)"
-    }
-   ],
-   "fichas": [],
-   "advertencia": "Toda la información suministrada en estos documentos ha sido extraída del respectivo manual RDH respetando los derechos de autor.",
-   "primerosAuxilios": {},
-   "incendios": "",
-   "departamento": "Superintendencia de Mantenimiento Mecánico",
-   "foto": "img/fotos/new-holland-service-tractor-td95.jpg",
-   "equipo": "M103",
-   "descripcion": "TRACTOR TD95 DT NEW HOLLAND M103",
-   "modelo": "TD95",
-   "flota": "Tractor",
-   "plantilla": "new-holland-service-tractor-td95"
   },
   {
    "id": "M104",
