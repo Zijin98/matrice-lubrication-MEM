@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-14T11:30:50-05:00",
+ "actualizado": "2026-11-14T11:32:29-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -29995,6 +29995,9 @@
  "grupos": {
   "CLG 856H": {
    "foto": "img/fotos/modelo-clg-856h-mwgm1qpq.jpg"
+  },
+  "PG10HA": {
+   "foto": "img/fotos/modelo-pg10ha-mwgmirjx.jpg"
   }
  }
 }
