@@ -184,6 +184,46 @@ export async function etiquetaQR({ titulo, eyebrow, detalle, url, pie, logoBlanc
   return aBlob(cv);
 }
 
+/** Etiqueta compacta de un equipo (sticker 5 × 6,4 cm a ~600 ppp): logo, QR, código y texto. */
+export async function etiquetaSticker({ codigo, texto, url, logoBlanco }) {
+  await asegurarFuentes();
+  const logo = await cargarImg(logoBlanco);
+  const W = 1200, BANDA = 192, R = 72, QR = 1008;
+  const H = 1572;
+  const cv = crearCanvas(W, H);
+  const c = cv.getContext('2d');
+  const L = new Lienzo(c, false);
+  // fondo blanco con esquinas redondeadas y línea de corte gris claro
+  c.save();
+  rr(c, 2, 2, W - 4, H - 4, R); c.clip();
+  c.fillStyle = '#FFFFFF'; c.fillRect(0, 0, W, H);
+  c.fillStyle = C.naranja; c.fillRect(0, 0, W, BANDA);
+  if (logo) {
+    const lh = 96, lw = Math.round((logo.naturalWidth / logo.naturalHeight) * lh);
+    const ew = Math.min(lw, W - 160), eh = Math.round(ew * logo.naturalHeight / logo.naturalWidth);
+    L.img(logo, (W - ew) / 2, (BANDA - eh) / 2, ew, eh);
+  } else {
+    L.fuente(64, 800, F.dsp); L.texto('ZIJIN · CONTINENTAL GOLD', W / 2, 122, '#FFFFFF', 'center');
+  }
+  const yq = BANDA + 36;
+  dibujarQR(c, url, (W - QR) / 2, yq, QR, { margen: 2, oscuro: C.tinta });
+  // código del equipo, ajustado al ancho
+  let px = 190;
+  L.fuente(px, 800, F.dsp);
+  while (c.measureText(codigo).width > W - 120 && px > 90) { px -= 6; L.fuente(px, 800, F.dsp); }
+  const yc = yq + QR + 12 + Math.round(px * 0.74);
+  L.texto(codigo, W / 2, yc, C.tinta, 'center');
+  // texto inferior
+  let pt = 62;
+  L.fuente(pt, 600);
+  while (c.measureText(texto).width > W - 100 && pt > 36) { pt -= 2; L.fuente(pt, 600); }
+  L.texto(texto, W / 2, yc + 34 + pt, C.tinta2, 'center');
+  c.restore();
+  rr(c, 2, 2, W - 4, H - 4, R);
+  c.strokeStyle = '#D9D4CC'; c.lineWidth = 4; c.stroke();
+  return aBlob(cv);
+}
+
 /* ---------------------------------------------------------- Matriz completa */
 
 export async function imagenMatriz({ equipo, lubricantes, url, logoBlanco, src, lis = () => '', unidades = [] }) {

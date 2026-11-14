@@ -2,7 +2,7 @@
 // - Guarda la página y, en segundo plano, todas las matrices con sus imágenes.
 // - Con señal: muestra lo más reciente. Con señal débil (más de 3 s) o sin señal:
 //   muestra al instante la copia guardada en el celular.
-const CACHE = 'matrices-v4';
+const CACHE = 'matrices-v5';
 const ESPERA_MS = 3000;
 const BASICOS = [
   './', 'index.html', 'css/app.css', 'js/app.js', 'js/util.js', 'js/qr.js', 'js/exportar.js', 'js/cripto.js', 'js/github.js',

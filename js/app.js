@@ -1,7 +1,7 @@
 // Matrices de lubricación — aplicación principal
 import { $, $$, esc, clave, vacio, esNA, clonar, sinAcentos, fechaCorta, fechaHora, ahoraISO, hoyISO, procesarImagen, descargarBlob, nombreArchivo, debounce } from './util.js';
 import { qrSVG } from './qr.js';
-import { etiquetaQR, imagenMatriz } from './exportar.js';
+import { etiquetaQR, etiquetaSticker, imagenMatriz } from './exportar.js';
 import { abrirSesion, cifrar, descifrar } from './cripto.js';
 import { Repo, datosRepo } from './github.js';
 
@@ -616,12 +616,9 @@ function vistaMatriz(id) {
   if (foto) { if (foto.complete && foto.naturalWidth) ajustar(); else foto.addEventListener('load', ajustar); }
 }
 
+// Etiqueta compacta del equipo. El enlace del QR (urlUnidad) no cambia: los QR ya impresos siguen funcionando.
 function etiquetaUnidad(eq) {
-  return etiquetaQR({
-    titulo: eq.equipo, eyebrow: 'Matriz de cambio de aceite - MEM',
-    detalle: [eq.modelo, eq.flota].filter(Boolean).join(' · ') || eq.activo,
-    url: urlUnidad(eq.id), pie: `${eq.departamento || 'Departamento de Tribología'} · ${eq.lugar || lugarGeneral()}`, logoBlanco: LOGO_BLANCO,
-  });
+  return etiquetaSticker({ codigo: eq.equipo, texto: 'Matriz de cambio de aceite MEM', url: urlUnidad(eq.id), logoBlanco: LOGO_BLANCO });
 }
 function cargarJSZip() {
   if (window.JSZip) return Promise.resolve(window.JSZip);
@@ -648,7 +645,7 @@ function hojaDescarga(eq) {
   abrirCapa(`<div class="dialogo" role="dialog" aria-modal="true" aria-labelledby="t-desc">
     <h2 id="t-desc">Descargar</h2>
     <p>Equipo ${esc(eq.equipo)} · seleccione qué desea descargar.</p>
-    <button type="button" class="opcion" data-desc="qr"><span class="op-icono">${I('qr')}</span><span><b>Código QR del equipo ${esc(eq.equipo)}</b><small>Etiqueta PNG para imprimir y pegar en el equipo</small></span></button>
+    <button type="button" class="opcion" data-desc="qr"><span class="op-icono">${I('qr')}</span><span><b>Código QR del equipo ${esc(eq.equipo)}</b><small>Sticker de 5 × 6,4 cm (PNG) para imprimir y pegar en el equipo</small></span></button>
     <button type="button" class="opcion" data-desc="matriz"><span class="op-icono">${I('doc')}</span><span><b>Matriz de lubricación</b><small>Imagen PNG en alta resolución</small></span></button>
     ${todos.length > 1 ? `<button type="button" class="opcion" data-desc="qr-todos"><span class="op-icono">${I('qr')}</span><span><b>QR de los ${todos.length} equipos ${esc(eq.modelo)}</b><small>Archivo ZIP con una etiqueta por equipo</small></span></button>` : ''}
     <button type="button" class="btn btn-fantasma ancho" data-cerrar>Cancelar</button>

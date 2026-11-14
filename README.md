@@ -8,7 +8,7 @@ Página web (GitHub Pages) con la **matriz de cambio de aceite de cada equipo** 
 - El historial se guarda **cifrado** en el repositorio. Solo se puede ver dentro de la página (botón *Historial*, con la contraseña) y se puede descargar en CSV para Excel.
 - **Cada equipo tiene su propia matriz y su propio QR** (por ejemplo `?u=T001`). Al editar T001 solo cambia T001, así que varios equipos del mismo modelo pueden tener lubricantes, cantidades o intervalos distintos. Si quiere repetir un cambio en varios equipos, use «Aplicar también a otros equipos» en el editor.
 - El inicio tiene buscador general y filtros por **flota, modelo y equipo** (tomados del IH08), con selección múltiple, buscador y borrador de filtros.
-- Cada matriz tiene un botón **Descargar** con dos opciones: la etiqueta del **código QR** (PNG de 1500 px, lista para imprimir) o la **matriz completa** (PNG de 2400 px).
+- Cada matriz tiene un botón **Descargar** con dos opciones: la etiqueta del **código QR** (sticker de 5 × 6,4 cm en PNG de alta resolución, lista para imprimir) o la **matriz completa** (PNG de 2400 px).
 - Editar una matriz **no cambia su QR**: el QR apunta a un identificador fijo (`?eq=cat-montacarga`), no al nombre del equipo.
 - Si un celular ya abrió la página una vez, puede volver a abrirla aunque se quede sin señal.
 
