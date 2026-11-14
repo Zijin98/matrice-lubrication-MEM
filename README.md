@@ -63,6 +63,7 @@ El token queda guardado **cifrado con la contraseña**: aunque alguien vea los a
 1. En el inicio, use **Editar matriz** para completar los datos que en el Excel estaban vacíos, como el intervalo de cambio o la cantidad (aparecen como *Por definir*).
 2. Abra cada matriz y haga clic en **Descargar → QR de todos los equipos**. Se descarga un ZIP con una etiqueta por equipo: imprímalas y pegue cada una en su equipo.
 3. Descargue el QR de la página de inicio (está al final del inicio) para carteleras o el taller.
+4. Para imprimir o cotizar todos los stickers de una vez: al final del inicio, **Descargar todos los QR (ZIP)**. Trae un sticker por cada equipo con matriz, el QR del inicio, `Listado_QR.csv` (para Excel) y `LEEME.txt` con las medidas.
 
 ---
 

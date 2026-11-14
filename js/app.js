@@ -475,7 +475,11 @@ function vistaInicio() {
       <div>
         <h2>QR de la página de inicio</h2>
         <p>Escanéelo para abrir el buscador de matrices desde cualquier celular.</p>
-        <button type="button" class="btn btn-sec btn-peq" data-accion="qr-inicio">${I('descargar')} Descargar QR</button>
+        <div class="fila-botones">
+          <button type="button" class="btn btn-sec btn-peq" data-accion="qr-inicio">${I('descargar')} Descargar QR</button>
+          <button type="button" class="btn btn-sec btn-peq" data-accion="qr-todos-mina">${I('qr')} Descargar todos los QR (ZIP)</button>
+        </div>
+        <small class="ayuda-qr">El ZIP trae el sticker de cada equipo con matriz, el QR de esta página y un listado para cotizar la impresión.</small>
       </div>
     </div>
     ${htmlOffline()}
@@ -630,6 +634,51 @@ function cargarJSZip() {
     document.head.appendChild(sc);
   });
 }
+const etiquetaInicio = () => etiquetaQR({ titulo: 'Matrices de lubricación', eyebrow: 'Página de inicio', detalle: 'Buscador de equipos', url: urlBase(), pie: `${plantilla().departamento || 'Departamento de Tribología'} · ${lugarGeneral()}`, logoBlanco: LOGO_BLANCO });
+
+/** ZIP con los stickers de TODOS los equipos con matriz, el QR del inicio y un listado (para cotizar e imprimir). */
+async function zipTodosQR(avance = () => {}) {
+  if (navigator.onLine) {
+    try { // tomar la versión más reciente publicada (por si alguien editó o eliminó matrices)
+      const r = await fetch(`data/matrices.json?t=${Date.now()}`, { cache: 'no-store' });
+      if (r.ok) { const d = await r.json(); if (Array.isArray(d.equipos)) estado.datos = d; }
+    } catch { /* se usa la copia cargada */ }
+  }
+  const JSZip = await cargarJSZip();
+  const zip = new JSZip();
+  const eqs = [...estado.datos.equipos].sort((a, b) => (a.modelo || '').localeCompare(b.modelo || '', 'es', { numeric: true }) || a.equipo.localeCompare(b.equipo, 'es', { numeric: true }));
+  const fecha = hoyISO();
+  avance(0, eqs.length + 1);
+  zip.file('00_QR_Inicio_Matrices_de_lubricacion.png', await etiquetaInicio());
+  const carpeta = zip.folder('Stickers_equipos');
+  const filas = [['N°', 'Equipo', 'Modelo', 'Flota', 'Archivo', 'Tamaño', 'Enlace del QR']];
+  filas.push([0, 'INICIO', '', '', '00_QR_Inicio_Matrices_de_lubricacion.png', 'Etiqueta de inicio (formato vertical)', urlBase()]);
+  for (let i = 0; i < eqs.length; i++) {
+    const e = eqs[i], arch = `QR_${nombreArchivo(e.equipo)}.png`;
+    avance(i + 1, eqs.length + 1);
+    carpeta.file(arch, await etiquetaUnidad(e));
+    filas.push([i + 1, e.equipo, e.modelo || '', e.flota || '', `Stickers_equipos/${arch}`, 'Sticker 5 × 6,4 cm', urlUnidad(e.id)]);
+  }
+  const q = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  zip.file('Listado_QR.csv', '\uFEFF' + filas.map((f) => f.map(q).join(';')).join('\r\n'));
+  zip.file('LEEME.txt', [
+    'STICKERS QR - MATRICES DE CAMBIO DE ACEITE MEM',
+    `Generado: ${fecha}`,
+    '',
+    `Stickers de equipos: ${eqs.length} (carpeta Stickers_equipos)`,
+    '  Tamaño final: 5 cm de ancho x 6,4 cm de alto, esquinas redondeadas (la línea gris es la guía de corte).',
+    '  Resolución: 1200 x 1572 px (aprox. 600 ppp a ese tamaño).',
+    '  Uso: pegado en equipos de mina (sugerido: vinilo resistente a aceite, agua y UV, con laminado).',
+    '',
+    'QR de la página de inicio: 1 (00_QR_Inicio_Matrices_de_lubricacion.png), formato vertical.',
+    '',
+    'Listado_QR.csv: un renglón por sticker (equipo, modelo, flota, archivo y enlace). Se abre con Excel.',
+    `Total de piezas: ${eqs.length + 1}`,
+  ].join('\r\n'));
+  descargarBlob(await zip.generateAsync({ type: 'blob' }), `QR_todos_los_equipos_${fecha}.zip`);
+  return eqs.length;
+}
+
 async function zipQR(eqs, nombre, avance = () => {}) {
   const JSZip = await cargarJSZip();
   const zip = new JSZip();
@@ -1774,7 +1823,7 @@ document.addEventListener('click', async (e) => {
     case 'qr-inicio': {
       b.disabled = true;
       try {
-        const blob = await etiquetaQR({ titulo: 'Matrices de lubricación', eyebrow: 'Página de inicio', detalle: 'Buscador de equipos', url: urlBase(), pie: `${plantilla().departamento || 'Departamento de Tribología'} · ${lugarGeneral()}`, logoBlanco: LOGO_BLANCO });
+        const blob = await etiquetaInicio();
         descargarBlob(blob, 'QR_Inicio_Matrices_de_lubricacion.png');
         toast('Imagen descargada');
       } catch (x) { console.error(x); toast('No se pudo generar el QR', 'error'); }
@@ -1782,6 +1831,13 @@ document.addEventListener('click', async (e) => {
       return;
     }
     case 'ampliar': return visor(b.dataset.src);
+    case 'qr-todos-mina': {
+      b.disabled = true; const txt = b.innerHTML;
+      try { const n = await zipTodosQR((i, n) => { b.textContent = `Generando ${i} de ${n}…`; }); toast(`ZIP descargado: ${n} stickers + QR de inicio`); }
+      catch (x) { console.error(x); toast('No se pudo generar el ZIP', 'error'); }
+      b.innerHTML = txt; b.disabled = false;
+      return;
+    }
     case 'qr-modelo': {
       const eqs = agrupar(listaFiltrada(estado.q, true).lista).find((g) => g.modelo === b.dataset.modelo)?.eqs || delModelo(b.dataset.modelo);
       b.disabled = true; const txt = b.innerHTML;

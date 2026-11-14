@@ -559,3 +559,9 @@ img.lis { display: block; width: 64px; height: 22px; object-fit: fill; border-ra
 .aviso-rojo .i { flex: none; color: var(--rojo); }
 .txt-rojo { color: var(--rojo); }
 .zona-peligro-mini { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--rojo-borde); }
+
+.qr-inicio .fila-botones { margin-top: 4px; }
+.ayuda-qr { display: block; margin-top: 8px; font-size: 13px; color: var(--tinta-3); }
+.qr-inicio > div:last-child { min-width: 0; }
+.qr-inicio .fila-botones .btn { white-space: normal; text-align: left; }
+@media (max-width: 719px) { .qr-inicio { grid-template-columns: 1fr; } .qr-inicio .qr { margin: 0 auto; } }
