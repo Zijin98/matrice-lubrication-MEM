@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-14T12:08:12-05:00",
+ "actualizado": "2026-11-14T15:46:50-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -25,7 +25,7 @@
   },
   "chevron-cetus-pao-iso-46": {
    "nombre": "Chevron cetus PAO ISO 46",
-   "imagen": ""
+   "imagen": "img/lubricantes/chevron-cetus-pao-iso-46-mwgvj7ic.jpg"
   },
   "chevron-delo-400-xle-sb-sae-15w40": {
    "nombre": "Chevron Delo 400 XLE SB SAE 15W40",
@@ -5683,7 +5683,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-11T11:45:54-05:00",
+   "actualizado": "2026-11-14T15:46:50-05:00",
    "imagen": "img/equipos/bolter-ds311-3.jpg",
    "puntos": [
     {
