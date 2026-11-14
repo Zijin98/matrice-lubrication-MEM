@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-14T11:24:06-05:00",
+ "actualizado": "2026-11-14T11:29:26-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8660,117 +8660,6 @@
    "modelo": "M317D2",
    "flota": "Excavator",
    "plantilla": "cat-excavadora-m317d2"
-  },
-  {
-   "id": "K001",
-   "activo": "PUTZMEISTER MIXKRET 5",
-   "codigo": "",
-   "lugar": "Proyecto Buriticá",
-   "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-11T13:11:40-05:00",
-   "imagen": "img/equipos/putzmeister-mixkret-5.jpg",
-   "puntos": [
-    {
-     "componente": "MOTOR",
-     "codigoLIS": "CK4-15W40-B-G3",
-     "lubricante": "Chevron Delo 400 XLE SB SAE 15W40",
-     "cantidad": "2,4",
-     "tarea": "Lubricado",
-     "intervaloCambio": "500 H",
-     "metodo": "Manual",
-     "intervaloMuestreo": "250 H",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "HIDRÁULICO",
-     "codigoLIS": "HM-68-M-G2",
-     "lubricante": "Chevron Hydraulic Oil AW-M 68",
-     "cantidad": "63",
-     "tarea": "Lubricado",
-     "intervaloCambio": "1000 H",
-     "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "CAJA REDUCTORA",
-     "codigoLIS": "GL5-85W140-M-G2",
-     "lubricante": "Chevron Delo Gear EP-5 SAE 85W140",
-     "cantidad": "0,7",
-     "tarea": "Lubricado",
-     "intervaloCambio": "500 H",
-     "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "DIFERENCIALES",
-     "codigoLIS": "GL5-80W90-M-G2",
-     "lubricante": "Chevron Delo Gear LS SAE 80W90",
-     "cantidad": "1,4",
-     "tarea": "Lubricado",
-     "intervaloCambio": "500 H",
-     "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "MANDOS FINALES",
-     "codigoLIS": "GL5-80W90-M-G2",
-     "lubricante": "Chevron Delo Gear LS SAE 80W90",
-     "cantidad": "1,4",
-     "tarea": "Lubricado",
-     "intervaloCambio": "500 H",
-     "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
-     "revisionNivel": ""
-    },
-    {
-     "componente": "LÍQUIDO REFRIGERANTE",
-     "codigoLIS": "N/A",
-     "lubricante": "Chevron ELC Antifreeze",
-     "cantidad": "N/A",
-     "tarea": "Lubricado",
-     "intervaloCambio": "2000 H",
-     "metodo": "Manual",
-     "intervaloMuestreo": "N/A",
-     "revisionNivel": ""
-    }
-   ],
-   "fichas": [
-    {
-     "nombre": "Chevron Delo 400 XLE SB SAE 15W40",
-     "url": "https://cglapps.chevron.com/MSDSPDS/PDSDetailPage.aspx?docDataId=482303&docFormat=PDF"
-    },
-    {
-     "nombre": "Chevron Hydraulic Oil AW-M 68",
-     "url": "https://cglapps.chevron.com/msdspds/PDSDetailPage.aspx?docDataId=412567&docFormat=PDF"
-    },
-    {
-     "nombre": "Chevron DELO GEAR EP-5 85W140",
-     "url": "https://cglapps.chevron.com/msdspds/PDSDetailPage.aspx?docDataId=486913&docFormat=PDF"
-    },
-    {
-     "nombre": "Chevron Delo Gear LS SAE 80W90",
-     "url": "https://cglapps.chevron.com/msdspds/PDSDetailPage.aspx?docDataId=516409&docFormat=PDF"
-    }
-   ],
-   "advertencia": "Por favor recordar usar los implementos de seguridad, los aceites y grasas calientes pueden causar quemaduras y heridas graves durante la manipulación de relubricado. Se recomienda realizar mantenimientos preventivos para observar el funcionamiento tribológico, detectar taponamientos o alzas de temperatura en el sistema. Recordar la importancia de la buena estibación y limpieza de los implementos de lubricación. Se recomienda suministrar esta ficha de lubricación al OEM para su aprobación de garantía. Antes de accionar los equipos se debe verificar los niveles. LAS GRÁFICAS DE PUNTOS DE LUBRICACIÓN PUEDEN VARIAR DESDE EL MANUAL VS IN SITU, POR ENDE EL LUBRICADOR Y JEFE DE LUBRICADORES DEBEN VERIFICAR EN CAMPO LOS PUNTOS DE LUBRICADO.",
-   "primerosAuxilios": {
-    "ojos": "No hacen falta medidas específicas de primeros auxilios. A modo de precaución, quítese los lentes de contacto si los trae puestos y lávese los ojos con agua.",
-    "piel": "No hacen falta medidas específicas de primeros auxilios. A modo de precaución, quítese la ropa y los zapatos si resultan contaminados. Para quitarse la sustancia de la piel, use agua y jabón. Deseche la ropa y los zapatos contaminados o límpielos a cabalidad antes de volverlos a usar.",
-    "ingestion": "No hacen falta medidas específicas de primeros auxilios. No induzca el vómito. A modo de precaución, procure asesoramiento médico inmediato.",
-    "inhalacion": "No hacen falta medidas específicas de primeros auxilios. Si ha sido expuesto a niveles excesivos de la sustancia en el aire, traslade a la persona expuesta al aire fresco. Procure atención médica si sobreviene tos o molestia al respirar.",
-    "nota": "En caso de presencia de síntomas y efectos graves, por favor revisar la ficha de seguridad suministrada al área competente y procure atención médica inmediata."
-   },
-   "incendios": "Use niebla de agua, espuma, materiales químicos secos y dióxido de carbono (CO₂) para extinguir las llamas.",
-   "departamento": "Departamento de Tribología",
-   "foto": "img/fotos/putzmeister-mixkret-5.jpg",
-   "equipo": "K001",
-   "descripcion": "MIXKRET MIX5 PUTZMEISTER K001",
-   "modelo": "MIX5",
-   "flota": "Mixkret",
-   "plantilla": "putzmeister-mixkret-5"
   },
   {
    "id": "K002",
