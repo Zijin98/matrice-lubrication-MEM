@@ -1,6 +1,6 @@
 {
  "esquema": 2,
- "actualizado": "2026-11-25T17:36:39-05:00",
+ "actualizado": "2026-11-26T15:46:16-05:00",
  "plantilla": {
   "lugar": "Proyecto Buriticá",
   "departamento": "Departamento de Tribología",
@@ -8778,7 +8778,7 @@
    "codigo": "",
    "lugar": "Proyecto Buriticá",
    "fechaElaboracion": "2024-01-08",
-   "actualizado": "2026-11-11T13:13:46-05:00",
+   "actualizado": "2026-11-26T15:46:16-05:00",
    "imagen": "img/equipos/tl-manitou-mtx1840.jpg",
    "puntos": [
     {
@@ -8822,7 +8822,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
@@ -8833,7 +8833,7 @@
      "tarea": "Lubricado",
      "intervaloCambio": "500 H",
      "metodo": "Manual",
-     "intervaloMuestreo": "500 H",
+     "intervaloMuestreo": "250 H",
      "revisionNivel": ""
     },
     {
